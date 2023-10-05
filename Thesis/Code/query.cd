@@ -1,0 +1,25 @@
+(*Query*)
+let sel = select y
+		from x in [ontology]/Individual,
+	     	 y in [x]/Name
+in
+map sel with <rdfs:comment> n -> n;;
+
+(*projection 1*)
+map [ontology]/Individual/Name with <rdfs:comment> n -> n;;
+
+(*projection 2*)
+map [ontology]/Individual/<rdfs:comment> _ with <rdfs:comment> n -> n;;
+
+(*error 1*)
+[ontology]/Name;;
+
+(*error 2*)	
+let sel = select x 
+		from x in [ontology]/Individual
+in [sel]/Name
+
+(*correction error 2*)
+let sel = select x 
+		from x in [ontology]/Individual
+in sel/Name

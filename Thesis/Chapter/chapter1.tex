@@ -1,0 +1,37 @@
+\chapter{Concetti di base}
+
+\section*{Introduzione}
+Qui illustriamo alcuni dei concetti di base che serviranno per comprendere il resto della discussione, daremo una definizione di ontologia e tesauro, descriveremo brevemente gli strumenti utilizzati e i linguaggi con cui si descrivono le basi di conoscenza che tratteremo.
+
+
+\section{Ontologie e tesauri}
+
+\subsection{ontologie}
+\subsubsection{Esempio}
+Consideriamo una semplice ontologia che rappresenta persone con legami di parentela genitore-figlio; le persone hanno uno o più nomi salvate nel tag \verb|comment|. Modelliamo questa ontologia con una classe \verb|Persone| e una sottoclasse \verb|Genitori| (i cui individui sono \verb|Persone| che realizzano la relazione \verb|genitoreDi|). Creiamo la relazione \verb|genitoreDi|. Infine popoliamo l'ontologia con alcuni individui. Il risultato ottenuto con Protégé è un documento XML di questo tipo:
+\addxml{persone.rdf}{lst:persone.rdf}{Code/persone.rdf}
+
+\subsection{Tesauri}
+
+\section{Strumenti di editing}
+
+\subsection{Protégé}
+
+\subsection{CDuce}
+\subsubsection{Pattern matching}
+\label{CDucePattern}
+È un'operazione fondamentale in Cduce ed ha la forma:
+\begin{minted}[tabsize=2, breaklines, bgcolor=bg]{OCaml}
+match e with
+	| p1 -> e1
+	...
+	| pn -> en
+\end{minted}
+Si cerca di fare il match tra la valutazione di un'espressione \verb|e| e vari pattern \verb|pi|. Il primo pattern che fa il match con \verb|e| attiva la corrispondente espressione sulla destra che può usare le variabili legate dal pattern.
+
+
+\section{Metalinguaggi}
+
+\subsection{OWL}
+
+\subsection{SKOS}

@@ -1,0 +1,26 @@
+namespace owl="http://www.w3.org/2002/07/owl#"
+namespace rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+namespace www="http://www.persone#"
+namespace xml="http://www.w3.org/XML/1998/namespace"
+namespace xsd="http://www.w3.org/2001/XMLSchema#"
+namespace rdfs="http://www.w3.org/2000/01/rdf-schema#";;
+
+type Ontology = <rdf:RDF xml:base=String> [ Thing * ]
+type Thing = Ont | Property | Class | Individual
+
+type Ont = <owl:Ontology rdf:about=String> []
+
+type Property = <owl:ObjectProperty rdf:about=String> []
+
+type Class = <owl:Class rdf:about=String> [ ClassAttr * ]
+type ClassAttr = EqClass | SubClass
+type EqClass = <owl:equivalentClass> [ <owl:Restriction> [ AnyXml * ] ]
+type SubClass = <rdfs:subClassOf rdf:resource=String> []
+
+type Individual = <owl:NamedIndividual rdf:about=String> [ IndAttr * ]
+type IndAttr = TypeInd | PropInd | Name
+type Name = <rdfs:comment> String
+type TypeInd = <rdf:type rdf:resource=String> []
+type PropInd = <_ rdf:resource=String> [];;
+
+let ontology :? Ontology = load_xml "persone.rdf";;

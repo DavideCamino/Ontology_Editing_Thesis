@@ -1,0 +1,12 @@
+let fun transformAtt (DescAtt -> [ClassAtt*])
+	| x & PrefLabel  -> [(transformLabel x)]
+	| x & AltLabel   -> [(transformLabel x)]
+	| x & ScopeNote  -> [(transformNote x)]
+	| x & ExactMatch -> [(transformDictionary x)]
+	| x & Broader    -> [(transformSubClass x)]
+	| Any            -> [];;
+		
+let fun transformClass (Desc -> Class)
+	<rdf:Description rdf:about=ab> [ (descAtt :: DescAtt)* ] ->
+		let classAtt = flatten ( map descAtt with x -> transformAtt x) in
+		<owl:Class rdf:about=ab> classAtt;;

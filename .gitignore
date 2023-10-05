@@ -1,0 +1,9 @@
+Thesis/*
+!Thesis/Biblio/
+!Thesis/Chapter/
+!Thesis/Code/
+!Thesis/Picture/
+!Thesis/main.pdf
+!Thesis/main.tex
+
+CDuce/**/*.properties

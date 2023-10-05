@@ -1,0 +1,12 @@
+let fun transformNote (ScopeNote -> Note)
+	x -> x
+	
+let fun transformDictionary (ExactMatch -> Dictionary)
+	x -> x
+
+let fun transformLabel (PrefLabel -> Label ; AltLabel -> Label)
+	| <skos:prefLabel xml:lang=l> lab -> <rdfs:label xml:lang=l> lab
+	| <skos:altLabel xml:lang=l> lab  -> <rdfs:label xml:lang=l> lab;;
+
+let fun transformSubClass (Broader -> SubClass)
+	<skos:broader rdf:resource=res> [] -> <rdfs:subClassOf rdf:resource=res> [];;
