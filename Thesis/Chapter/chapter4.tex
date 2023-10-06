@@ -1,6 +1,29 @@
 \chapter{Merge di ontologie}
+\label{ch4}
 \section*{intoduzione}
 In questo capitolo vediamo come sia possibile usare CDuce per fare il merge di ontologie, cercando di mettere in risalto quelli che possono essere i vantaggi di usare un linguaggio funzionale rispetto ad uno strumento grafico. Alla fine del capitolo paragoneremo l'approccio con CDuce a quello con Protégé. Per mettere in evidenza i vantaggi di CDuce presentiamo un esempio un po' più complesso di quelli visti in precedenza in modo da far risaltare le potenzialità di CDuce e contemporaneamente dare un'idea di funzioni più complesse.
 
 \section{Obiettivo del merge}
-Prima di mostrare gli algoritmi di merge vediamo le ontologie che vorremmo fondere. Consideriamo un estensione dell'ontologia delle persone 
+Adesso che abbiamo creato un ontologia a partire dall'\say{European Fashion Thesaurus} e abbiamo descritto una semplice ontologia per descrivere persone vorremmo fonderle in una nuova ontologia che possa parlare degli usi e costumi della società, magari riferita ad un ben preciso periodo storico. Vogliamo creare un'ontologia in cui sia possibile rappresentare delle persone, coi rispettivi legami di parentela e nella quale sia possibile associare uno status sociale, un lavoro e dell'abbigliamento alle persone.
+\subsection{Ontologie di partenza}
+Per creare questa ontologia consideriamo 3 ontologie di partenza:
+\begin{itemize}
+	\item \verb|society|: è lo scheletro dell'ontologia che vogliamo ottenere, è comodo crearla a priori in modo da non dover creare ex novo tutta la struttura in CDuce, inizialmente rappresenta delle persone sulle quali definiamo le relazioni \verb|born_in|, \verb|is| e \verb|work_as| che associano una persona con la città di nascita, con il suo status sociale e con il proprio lavoro;
+	\item \verb|people|: rappresenta gli individui con le loro parentele, rispetto all'ontologia presentata in \ref{lst:persone.rdf} abbiamo aggiunto la relazione simmetrica \verb|marry|, e la relazione \verb|son_of| come inversa di \verb|parent_of|, aggiungiamo anche l'anno di nascita;
+	\item \verb|fashion|: l'ontologia che abbiamo creato nel capitolo \ref{ch3} arricchita con le relazioni \verb|made_of|, \verb|crafted_with|, \verb|color|, che indicano rispettivamente i materiali costituenti, le tecniche realizzative e i colori di un capo d'abbigliamento.
+\end{itemize}
+\subsection{Ontologia di arrivo}
+Vogliamo modificare \verb|society| in modo da descrivere gli usi e i costumi della società del XII secolo, per fare questo estrapoliamo dall'ontologia \verb|fashion| tutti i vestiti che non siano costituiti da fibre artificiali e scremiamo dall'ontologia \verb|people| tutte le persone che sono vissute in un'epoca che non ci interessa. Vogliamo poi che la classe \verb|People| definita in \verb|society| sia equivalente alla classe \verb|People| definita in \verb|people|, senza perdere tutte le relazioni di parentela, e potendo contemporaneamente sfruttare le nuove relazioni definite in \verb|society|.
+
+\section{Struttura generica di un'ontologia}
+Per fare il merge dobbiamo poter caricare le 3 ontologie in CDuce, quindi descriviamo una struttura generale per fare il parsing di un'ontologia generica:
+\addocaml{general structure}{lst:general_structure}{Code/general_structure.cd}
+\newpage
+Rispetto alle strutture definite in precedenza notiamo varie aggiunte:
+\begin{itemize}
+	\item si specifica meglio l'elemento \verb|EqClass|, questo infatti può essere una restrizione (un genitore è una persona con dei figli) oppure un equivalenza senza condizioni (ci serve per rendere uguali i concetti di persona definiti nelle 2 ontologie);
+	\item definiamo il tipo \verb|DataProperty|, questo rappresenta una proprietà degli individui, nel nostro caso la usiamo per specificare l'anno di nascita di una persona. Gli individui nella loro lista di attributi potranno ora averne uno di tipo \verb|DataProp|;
+	\item il tipo \verb|AnnProperty| serve perché avendo editato l'ontologia \verb|fashion| in protégé per aggiungere le relazioni non presenti nel thesauro i tag SKOS sono stati correttamente riconosciuti \cite{OWL&SKOS} e classificati come tag \verb|owl:AnnotationProperty|;
+\end{itemize}
+
+
