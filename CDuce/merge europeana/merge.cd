@@ -63,10 +63,6 @@ let fun subClassesRec ( Class -> Ontology -> [ Class* ])
 		
 let fun tradIt ( [ Class* ] -> [ Label* ] )
 	x -> x/<rdfs:label xml:lang="it"> _;;
-
-let fun head ([ Any* ] -> Any)
-	| ([ x ] @ _) -> x
-	| [] -> "error empty list";;
 	
 let fun andArray ( [ Bool* ] -> Bool )
 	| ([ x ] @ y) -> (x && (andArray y))

@@ -1,0 +1,52 @@
+let fun loadOntology (Latin1 -> Ontology)
+	x -> load_xml x :? Ontology;;
+
+let fun head ([ Any* ] -> Any)
+	| ([ x ] @ _) -> x
+	| [] -> "error empty list";;
+
+let fun subClasses (Class -> Ontology -> [ Class* ])
+	<owl:Class rdf:about=ab> [ _* ] -> fun (Ontology -> [ Class* ])
+	ont ->
+		select x from
+					 x in [ont]/Class,
+					 y in [x]/SubClass
+		where (y = <rdfs:subClassOf rdf:resource=ab> []);;
+		
+let fun subClassesRec ( Class -> Ontology -> [ Class* ])
+	cl -> fun (Ontology -> [ Class* ])
+	ont ->
+		let subCl = subClasses cl ont in
+		subCl @ flatten (map subCl with y -> subClassesRec y ont)
+		
+let fun andArray ( [ Bool* ] -> Bool )
+	| ([ x ] @ y) -> (x && (andArray y))
+	| [] -> `true;;
+	
+let fun orArray ( [ Bool* ] -> Bool )
+	| ([ x ] @ y) -> (x || (orArray y))
+	| [] -> `false;;
+	
+let fun classOf (Individual -> Ontology -> [Class*])
+	<owl:NamedIndividual ..> [ (tp::IndClass | _) *] -> fun (Ontology -> [Class*])
+	ont ->
+		transform tp with <rdf:type rdf:resource=str> [] ->
+			transform [ont]/Class with x ->
+				match x with <owl:Class rdf:about=a>[ _* ] -> if a = str then [x] else [];;
+
+let fun contains (Any -> [Any*] -> Bool)
+	obj -> fun ([Any*] -> Bool)
+	lst ->
+	let intersect = select x from x in lst
+								 where (x = obj) in
+	match intersect with
+		| []       -> `false
+		| [ Any* ] -> `true;;
+
+let fun isInClasses (Individual -> [Class*] -> Ontology -> Bool)
+	ind -> fun ([Class*] -> Ontology -> Bool)
+	classes -> fun (Ontology -> Bool)
+	ont ->
+	let cl = classOf ind ont in
+	let res = map cl with x -> contains x  classes in
+	andArray res;;

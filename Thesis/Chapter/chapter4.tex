@@ -25,5 +25,17 @@ Rispetto alle strutture definite in precedenza notiamo varie aggiunte:
 	\item definiamo il tipo \verb|DataProperty|, questo rappresenta una proprietà degli individui, nel nostro caso la usiamo per specificare l'anno di nascita di una persona. Gli individui nella loro lista di attributi potranno ora averne uno di tipo \verb|DataProp|;
 	\item il tipo \verb|AnnProperty| serve perché avendo editato l'ontologia \verb|fashion| in protégé per aggiungere le relazioni non presenti nel thesauro i tag SKOS sono stati correttamente riconosciuti \cite{OWL&SKOS} e classificati come tag \verb|owl:AnnotationProperty|;
 \end{itemize}
+\section{Merge}
+\subsection{Funzioni utili}
+Prima di passare alla costruzione della nuova ontologia vediamo alcune funzioni utili che si possono applicare a qualsiasi ontologia e che sono servite per costruire le funzioni specifiche adatte a manipolare la particolare ontologia di interesse
+\addocaml{usefull function}{lst:utility.cd}{Code/utility.cd}
+Per la prima volta abbiamo fatto ricorso a applicazioni parziali (curried functions\footnote{https://en.wikipedia.org/wiki/Currying}), questo è utile per poter parametrizzare anche l'ontologia di riferimento per l'operazione; dato che in questo caso ne manipoliamo contemperaneamente 3 è importante poter specificare volta per volta a quale ci riferiamo.
 
+Vediamo per la prima volta un esempio di funzione ricorsiva: \verb|subClassRec| richiama ricorsivamente se stessa per costruire l'intero albero di sottoclassi a partire da una classe data (e dall'ontologia di riferimento). Ovviamente perché questa funzione possa terminare la struttura delle classi deve essere un grafo aciclico (questa non è una grossa limitazione, infatti se la classe \verb|c2| è contemporaneamente sopraclasse e sottoclasse di \verb|c1| allora \verb|c1| e \verb|c2| sono equivalenti e possono essere accorpate per eliminare i cicli, discorso analogo vale per cicli più lunghi).
 
+Per verificare se un individuo si trova in un certo albero di classi si potrebbe operare al contrario rispetto a \verb|subClassRec|, risalendo l'albero fino a quando non si trova il padre desiderato (restituendo \verb|true|) oppure la radice delle classi (restituendo \verb|false|). Questo approccio, però, presenta delle problematiche:
+\begin{itemize}
+	\item un individuo può appartenere a più classi, quindi bisognerebbe risalire \emph{n} alberi dove \emph{n} è il numero di classi a cui appartiene l'oggetto;
+	\item ogni classe può essere sottoclasse di più classi diramando così ulteriormente la ricerca.
+\end{itemize}
+Facendo alcuni test si nota che un approccio di questo genere, oltre ad essere impegnativo dal punto di vista implementativo è anche poco efficiente dal punto di vista prestazionale. Infatti come vedremo dopo per ogni capo d'abbigliamento dovremo chiederci se è costituito da materiali artificiali e questo rallenta il processo di merge; per evitare questo problema costruiamo solo una volta la lista di materiali artificiali e quando dobbiamo stabilire se un materiale è naturale o meno verifichiamo se appartiene alla lista dei materiali artificiali. Questo approccio è vantaggioso in quanto la lista di materiali artificiali andrebbe creata in ogni caso per andare ad aggiungere alla nuova ontologia tutti i materiali che non lo sono (conviene creare la lista dei materiali artificiali piuttosto che quella dei materiali naturali perché la prima contiene molti meno elementi, di conseguenza è più veloce da creare). 
