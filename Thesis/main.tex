@@ -16,6 +16,7 @@
 \usepackage[chapter]{minted}
 \usepackage{verbments}
 \usepackage{dirtytalk}
+\usepackage{xstring}
 \sloppy
 
 \usepackage[backend=bibtex, maxbibnames=10,
@@ -32,7 +33,7 @@ minalphanames=3]{biblatex}
 		\label{#2}
 	\end{listing}
 	\vspace{-.5cm}
-	\inputminted[tabsize=2, linenos, breaklines, bgcolor=bg]{OCaml}{"#3"}
+	\inputminted[tabsize=2, linenos, breaklines, bgcolor=bg, escapeinside=~~]{OCaml}{"#3"}
 }
 \newcommand{\addxml}[3] {
 	\begin{listing}[H]

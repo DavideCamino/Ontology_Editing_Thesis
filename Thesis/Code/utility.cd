@@ -19,12 +19,12 @@ let fun subClassesRec ( Class -> Ontology -> [ Class* ])
 		let subCl = subClasses cl ont in
 		subCl @ flatten (map subCl with y -> subClassesRec y ont)
 		
-let fun andArray ( [ Bool* ] -> Bool )
-	| ([ x ] @ y) -> (x && (andArray y))
+let fun andList ( [ Bool* ] -> Bool )
+	| ([ x ] @ y) -> (x && (andList y))
 	| [] -> `true;;
 	
-let fun orArray ( [ Bool* ] -> Bool )
-	| ([ x ] @ y) -> (x || (orArray y))
+let fun orList ( [ Bool* ] -> Bool )
+	| ([ x ] @ y) -> (x || (orList y))
 	| [] -> `false;;
 	
 let fun classOf (Individual -> Ontology -> [Class*])
@@ -49,4 +49,4 @@ let fun isInClasses (Individual -> [Class*] -> Ontology -> Bool)
 	ont ->
 	let cl = classOf ind ont in
 	let res = map cl with x -> contains x  classes in
-	andArray res;;
+	andList res;;

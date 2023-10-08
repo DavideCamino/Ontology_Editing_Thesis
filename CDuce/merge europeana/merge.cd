@@ -64,12 +64,12 @@ let fun subClassesRec ( Class -> Ontology -> [ Class* ])
 let fun tradIt ( [ Class* ] -> [ Label* ] )
 	x -> x/<rdfs:label xml:lang="it"> _;;
 	
-let fun andArray ( [ Bool* ] -> Bool )
-	| ([ x ] @ y) -> (x && (andArray y))
+let fun andList ( [ Bool* ] -> Bool )
+	| ([ x ] @ y) -> (x && (andList y))
 	| [] -> `true;;
 	
-let fun orArray ( [ Bool* ] -> Bool )
-	| ([ x ] @ y) -> (x || (orArray y))
+let fun orList ( [ Bool* ] -> Bool )
+	| ([ x ] @ y) -> (x || (orList y))
 	| [] -> `false;;
 	
 let fun classOf (Individual -> Ontology -> [Class*])
@@ -94,7 +94,7 @@ let fun isInClasses (Individual -> [Class*] -> Ontology -> Bool)
 	ont ->
 	let cl = classOf ind ont in
 	let res = map cl with x -> contains x  classes in
-	andArray res;;
+	andList res;;
 		
 let fun madeOf (Individual -> Ontology -> [Individual*])
 	<owl:NamedIndividual ..> [ (ip::IndProp | _) *] -> fun (Ontology -> [Individual*])
@@ -112,4 +112,4 @@ let fun isArtificial (Individual -> [Class*] -> [Class*] -> Ontology -> Bool)
 		then (isInClasses ind artificialMats ont)
 		else 
 			let matMade = madeOf ind ont in
-			orArray (map matMade with x -> isInClasses x artificialMats ont);;
+			orList (map matMade with x -> isInClasses x artificialMats ont);;

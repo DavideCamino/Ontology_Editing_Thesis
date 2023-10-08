@@ -1,0 +1,17 @@
+let fun madeOf (Individual -> Ontology -> [Individual*])
+	<owl:NamedIndividual ..> [ (ip::IndProp | _) *] -> fun (Ontology -> [Individual*])
+	ont ->
+		transform ip with <ns1:made_of rdf:resource=str> [] ->
+			transform [ont]/Individual with x ->
+				match x with <owl:NamedIndividual rdf:about=a>[ _* ] -> if a = str then [x] else [];;
+		
+	
+let fun isArtificial (Individual -> [Class*] -> [Class*] -> Ontology -> Bool)
+	ind -> fun ([Class*] -> [Class*] -> Ontology -> Bool)
+	materials -> fun ([Class*] -> Ontology -> Bool)
+	artificialMats -> fun (Ontology -> Bool)
+	ont -> if (isInClasses ind materials ont) 
+		then (isInClasses ind artificialMats ont)
+		else 
+			let matMade = madeOf ind ont in
+			orList (map matMade with x -> isInClasses x artificialMats ont);;
