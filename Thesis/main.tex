@@ -17,6 +17,8 @@
 \usepackage{verbments}
 \usepackage{dirtytalk}
 \usepackage{xstring}
+\usepackage{fontspec}
+\newfontfamily{\noto}{Noto Serif}
 \sloppy
 
 \usepackage[backend=bibtex, maxbibnames=10,
@@ -24,7 +26,7 @@ minalphanames=3]{biblatex}
 \bibliography{Biblio/biblio} 
 
 
-\title{Editing di ontologie tramite il linguaggio di programmazione funzionale CDuce}
+\title{Editing di ontologie tramite il linguaggio di programmazione funzionale \cduce}
 \author{Davide Camino}
 \newcommand{\supervisor}{Professoressa Viviana Bono}
 \newcommand{\addocaml}[3] {
@@ -36,13 +38,15 @@ minalphanames=3]{biblatex}
 	\inputminted[tabsize=2, linenos, breaklines, bgcolor=bg, escapeinside=~~]{OCaml}{"#3"}
 }
 \newcommand{\addxml}[3] {
-	\begin{listing}[H]
+	\begin{listing}[H]%\newcommand{\cduce}{{\fira ℂ}Duce }
 		\caption{#1}
 		\label{#2}
 	\end{listing}
 	\vspace{-.5cm}
 	\inputminted[tabsize=2, linenos, breaklines, bgcolor=bg]{XML}{"#3"}
 }
+\newcommand{\cduce}{{\noto ℂ}Duce }
+%\newcommand{\cduce}{CDuce }
 \renewcommand{\listoflistingscaption}{Elenco listati}
 \renewcommand{\listingscaption}{Listato}
 
@@ -66,6 +70,7 @@ minalphanames=3]{biblatex}
 	\input{Chapter/chapter2}
 	\input{Chapter/chapter3}
 	\input{Chapter/chapter4}
+	\input{Chapter/chapter5}
 	\newpage
 	
 	\listoflistings
