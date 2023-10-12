@@ -4,6 +4,7 @@
 \usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
 
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{svg}
@@ -17,8 +18,9 @@
 \usepackage{verbments}
 \usepackage{dirtytalk}
 \usepackage{xstring}
-\usepackage{fontspec}
-\newfontfamily{\noto}{Noto Serif}
+\usepackage{hyperref}
+%\usepackage{fontspec}
+%\newfontfamily{\noto}{Noto Serif}
 \sloppy
 
 \usepackage[backend=bibtex, maxbibnames=10,
@@ -38,15 +40,15 @@ minalphanames=3]{biblatex}
 	\inputminted[tabsize=2, linenos, breaklines, bgcolor=bg, escapeinside=~~]{OCaml}{"#3"}
 }
 \newcommand{\addxml}[3] {
-	\begin{listing}[H]%\newcommand{\cduce}{{\fira ℂ}Duce }
+	\begin{listing}[H]
 		\caption{#1}
 		\label{#2}
 	\end{listing}
 	\vspace{-.5cm}
 	\inputminted[tabsize=2, linenos, breaklines, bgcolor=bg]{XML}{"#3"}
 }
-\newcommand{\cduce}{{\noto ℂ}Duce }
-%\newcommand{\cduce}{CDuce }
+%\newcommand{\cduce}{{\noto ℂ}Duce }
+\newcommand{\cduce}{$\mathbb{C}$Duce }
 \renewcommand{\listoflistingscaption}{Elenco listati}
 \renewcommand{\listingscaption}{Listato}
 
