@@ -6,7 +6,7 @@ In questo capitolo analizziamo brevemente gli strumenti principali offerti da \c
 \section{Parsing di documenti XML}
 Un documento XML non è altro che una struttura ad albero: ogni nodo rappresenta un concetto che può essere meglio definito nei figli del nodo stesso. 
 
-In \cduce possiamo ricostruire tale struttura definendo dei tipi. La forma generale di un elemento XML è \verb|<(tag) (attr)> content| dove \verb|tag|, \verb|attr| e \verb|content| sono espressioni su cui è possibile fare patten matching. Si può quindi creare un tipo generale che faccia match con il tag root del documento XML e che come \verb|content| abbia un array eterogeneo che conterrà tutti i figli del tag root. Ad ogni elemento del vettore sarà associato un tipo che avrà la stessa struttura del tipo generale e permetterà di descrivere la struttura del documento XML discendendo fino alle foglie.
+In \cduce possiamo ricostruire tale struttura definendo dei tipi. La forma generale di un elemento XML è \verb|<(tag) (attr)> content| dove \verb|tag|, \verb|attr| e \verb|content| sono espressioni su cui è possibile fare patten matching. Si può quindi creare un tipo generale che faccia match con il tag root del documento XML e che, come \verb|content|, abbia un array eterogeneo che conterrà tutti i figli del tag root. Ad ogni elemento del vettore sarà associato un tipo che avrà la stessa struttura del tipo generale e che permetterà di descrivere la struttura del documento XML discendendo fino alle foglie.
 \subsection{Esempio}
 Torniamo all'esempio dell'ontologia di persone definita nel listato \ref{lst:persone.rdf} e descriviamo in \cduce la sua struttura.
 \addocaml{persone.cd}{lst:persone.cd}{Code/persone.cd}
