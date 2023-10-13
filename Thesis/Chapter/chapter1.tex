@@ -7,9 +7,28 @@ Qui illustriamo alcuni dei concetti di base che serviranno per comprendere il re
 \section{Ontologie e tesauri}
 
 \subsection{ontologie}
+\subsubsection{Definizione}
+In accordo con una definizione ampiamente accettata \cite{hitzler2021review} un'ontologia ha lo scopo di rappresentare un vocabolario per definire i concetti di un particoare dominio di interesse condiviso, ed è costituita da definizioni di classi, relazioni, funzioni e altri oggetti utili a rappresentare la conoscenza\cite{gruber1993translation}. 
+
+La definizione è ancora un po' vaga, più precisamente un'ontologia è una base di conoscenza che permette di descrivere concetti e relazioni tra di essi specificando questi oggetti tramite un linguaggio di rappresentazione della conoscenza basato su una logica formale.
+\subsubsection{Scopo delle ontologie}
+Nel contesto del web semantico\footnote{Un'estensione del World Wide Web in cui le informazioni siano comprensibili ad un automa\cite{berners2001new}} le ontologie sono il mezzo principale per condividere, integrare e scoprire dati\cite{hitzler2021review}.
+\subsubsection{Manipolare ontologie}
+ Dato lo scopo delle ontologie risulta essere un argomento centrale la possibilità di riutilizzare, modificare e ampliare ontologie esistenti. Spesso le basi di conoscenza sono sì strutturate, ma sono eterogenee e non permettono interoperabilità. Scopo di questo lavoro è quello di presentare degli strumenti per manipolare basi di conoscenza (ci concentriamo si tesauri e ontologie) operando in modo tale da rendere compatibili informazioni tratte da fonti differenti. 
+ 
+ Il testo \cite{suarez2015neon} presenta una trattazione teorica approfondita sulle metodologie per sviluppare un'ontologia, in particolare il framework NeOn prevede vari scenari tipici in cui ci si può trovare quando si voglia costruire un ontologia, si fa particolare attenzione ai casi nei quali siano già presenti informazioni, ma queste vanno riorganizzate.
 \subsubsection{Esempio}
 Consideriamo una semplice ontologia che rappresenta persone con legami di parentela genitore-figlio; le persone hanno uno o più nomi salvate nel tag \verb|comment|. Modelliamo questa ontologia con una classe \verb|Persone| e una sottoclasse \verb|Genitori| (i cui individui sono \verb|Persone| che realizzano la relazione \verb|genitoreDi|). Creiamo la relazione \verb|genitoreDi|. Infine popoliamo l'ontologia con alcuni individui. Il risultato ottenuto con Protégé è un documento XML di questo tipo:
 \addxml{persone.rdf}{lst:persone.rdf}{Code/persone.rdf}
+\vspace{-1cm}
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\centering
+	\caption{Grafo dell'ontologia persone}
+	\includegraphics[width=0.5\textwidth]{Picture/persone.rdf.pdf}
+\end{wrapfigure}
+
+Per quanto non sia impossibile leggere la struttura e i dati dal listato precedente un modo naturale per rappresentare le ontologie è sotto forma di grafi. Qui vediamo il grafo\footnote{tutti i grafi presenti un questo elaborato sono stati ottenuti grazie a http://vowl.visualdataweb.org/webvowl.html} che mostra la struttura dell'ontologia e possiamo apprezzare quanto sia semplice la sua struttura rispetto a quello che avremmo potuto immaginare dal listato \ref{lst:persone.rdf}. Nel grafo non sono rappresentati gli individui, possiamo comunque leggere quanti ve ne sono per ogni classe (in questo caso un individuo di tipo \verb|Persone| e uno di tipo \verb|Genitori|)
+
 
 \subsection{Tesauri}
 
