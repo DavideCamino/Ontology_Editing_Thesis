@@ -4,8 +4,8 @@
 Qui illustriamo alcuni dei concetti di base che serviranno per comprendere il resto della discussione, daremo una definizione di ontologia e tesauro, descriveremo brevemente gli strumenti utilizzati e i linguaggi con cui si descrivono le basi di conoscenza che tratteremo.
 
 
-\section{Ontologie e tesauri}
-
+\section{Basi di conoscenza}
+Le basi di conoscenza sono 
 \subsection{ontologie}
 \subsubsection{Definizione}
 In accordo con una definizione ampiamente accettata \cite{hitzler2021review} un'ontologia ha lo scopo di rappresentare un vocabolario per definire i concetti di un particoare dominio di interesse condiviso, ed è costituita da definizioni di classi, relazioni, funzioni e altri oggetti utili a rappresentare la conoscenza\cite{gruber1993translation}. 
@@ -20,7 +20,6 @@ Nel contesto del web semantico\footnote{Un'estensione del World Wide Web in cui 
 \subsubsection{Esempio}
 Consideriamo una semplice ontologia che rappresenta persone con legami di parentela genitore-figlio; le persone hanno uno o più nomi salvate nel tag \verb|comment|. Modelliamo questa ontologia con una classe \verb|Persone| e una sottoclasse \verb|Genitori| (i cui individui sono \verb|Persone| che realizzano la relazione \verb|genitoreDi|). Creiamo la relazione \verb|genitoreDi|. Infine popoliamo l'ontologia con alcuni individui. Il risultato ottenuto con Protégé è un documento XML di questo tipo:
 \addxml{persone.rdf}{lst:persone.rdf}{Code/persone.rdf}
-\vspace{-1cm}
 \begin{wrapfigure}{r}{0.5\textwidth}
 	\centering
 	\caption{Grafo dell'ontologia persone}
@@ -31,7 +30,11 @@ Per quanto non sia impossibile leggere la struttura e i dati dal listato precede
 
 
 \subsection{Tesauri}
+Nella loro accezione più generale possibile i tesauri sono risorse nelle quali termini affini sono raggruppati assieme\cite{kilgarriff2000s}. In particolare un tesauro fornisce un vocabolario preciso e controllato rispetto ad un particolare dominio di interesse.\cite{srinivasan1992thesaurus} Queste strutture possono aiutare il ricercatore a riformulare le strategie di ricerca fornendo una serie di sinonimi, contrari, definizioni e traduzioni in altre lingue del termine cercato.
 
+Esistono diversi tipi di tesauro in base alle modalità di costruzione e fruizione \cite{kilgarriff2000s}, nel nostro caso il tesauro sarà costituito da un vocabolario tassonomico in cui le relazioni tra oggetti sono di tipo BT (broader term), cioè ogni concetto può avere un riferimento ad un concetto più generale, formando in questo modo una struttura ad albero. 
+
+Come si può immagina
 \section{Strumenti di editing}
 
 \subsection{Protégé}
