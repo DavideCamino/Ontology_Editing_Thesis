@@ -20,8 +20,7 @@
 \usepackage{dirtytalk}
 \usepackage{xstring}
 \usepackage{hyperref}
-%\usepackage{fontspec}
-%\newfontfamily{\noto}{Noto Serif}
+\usepackage{xspace} 
 \sloppy
 
 \usepackage[backend=bibtex, maxbibnames=10,
@@ -48,8 +47,7 @@ minalphanames=3]{biblatex}
 	\vspace{-.5cm}
 	\inputminted[tabsize=2, linenos, breaklines, bgcolor=bg]{XML}{"#3"}
 }
-%\newcommand{\cduce}{{\noto ℂ}Duce }
-\newcommand{\cduce}{$\mathbb{C}$Duce }
+\newcommand{\cduce}{$\mathbb{C}$Duce\xspace}
 \renewcommand{\listoflistingscaption}{Elenco listati}
 \renewcommand{\listingscaption}{Listato}
 
