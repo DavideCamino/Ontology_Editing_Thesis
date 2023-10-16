@@ -62,11 +62,15 @@ XDuce permette di manipolare unicamente documenti XML, questa sua specificità m
 
 \cduce si pone l'obbiettivo di integrare specifiche funzioni orientate alla manipolazione XML all'interno di un linguaggio potenzialmente general-porpouse. Per fare questo \cduce usa un algebra general-porpouse, con costruttori di tipo standard mantendendo l'espressività e la potenza delle espressioni regolari di XDuce attraverso l'uso di tipi ricorsivi e combinatori logici (unione, intersezione, differenza).
 
-In \cduce è possibile creare complesse strutture dati, modellare il tipo di documenti XML, e interfacciarsi in modo relativamente semplice con altri linguaggi di programmazione\cite{benzaken2002cduce}.
+In \cduce è possibile creare complesse strutture dati, modellare il tipo di documenti XML, e interfacciarsi in modo relativamente semplice con altri linguaggi di programmazione\cite{cduceLanguage}.
 \subsection{Feature}\label{fature_cduce}
 Vediamo brevemente le principali feature di \cduce, non entreremo nel dettaglio essendo presente una guida dettagliata sul sito del progetto\footnote{https://www.cduce.org/}
 \subsubsection{Verifica statica dei tipi}
-La correttezza di tipo per ogni trasformazione definita in \cduce
+Il sistema di tipi è un componente centrale di \cduce; dal punto di vista pratico un tipo è un insieme di valori identificati da un espressione sintattica, questa descrizione di un tipo permette di definire in modo naturale (come insiemi matematici) relazioni di sottotipo, connettivi logici nell'algebra dei tipi ed equivalenza di tipi.
+
+I tipi ricoprono un ruolo importante anche nella parte statica del linguaggio: la correttezza di ogni trasformazione definita in \cduce è garantita staticamente. Inoltre in \cduce il pattern matching viene effettuato attraverso un esatta inferenza di tipo, nel senso che viene assegnata ad ogni variabile legata esattamente il set di tutti i valori che questa può assumere.
+
+In questo modo è possibile costruire in sistema di tipi statico e molto preciso, che permette una migliore descrizione del comportamento dinamico del programma sviluppato
 \subsubsection{Pattern matching}
 \label{CDucePattern}
 È un'operazione fondamentale in \cduce ed ha la forma:
@@ -94,7 +98,34 @@ In cui la prima riga è l'interfaccia della funzione, il rimanente è detto corp
 \end{itemize}
 In \cduce è possibile definire anche applicazioni parziali(curried functions\footnote{https://en.wikipedia.org/wiki/Currying}) e funzioni di ordine superiore\footnote{https://en.wikipedia.org/wiki/Higher-order\_function}
 \section{Metalinguaggi}
+Un metalinguaggio è in generale un linguaggio , o sistema di segni, naturale o artificiale, adottato per la descrizione della struttura formale di dati linguaggi\footnote{https://www.treccani.it/vocabolario/metalinguaggio}. In questo elaborato parliamo di linguaggi su tre differenti livelli:
+\begin{itemize}
+	\item linguaggi di programmazione: sono i linguaggi con i quali sviluppiamo strumenti più o meno automatici per la manipolazione di basi di conoscenza;
+	\item ontologie e tesauri: esprimono della conoscenza in modo formale, rispettano certe logiche per poter essere usate e restituiscono all'interrogatore una risposta che quest'ultimo sia in grado di comprendere
+	\item linguaggi per descrivere le basi di conoscenza: abbiamo bisogno di un linguaggio per descrivere la struttura di una KB, per definire quali relazioni possono esserci e in generale per parlare le KB stessa; chiameremo questi ultimi metalinguaggi\footnote{questi linguaggi non ci permettono di descrivere il dominio di interesse di per sè ma descrivono come descrivere il dominio} per distinguerli dai linguaggi di programmazione e dalla conoscenza che stiamo rappresentando.
+\end{itemize}
+Presentiamo alcuni metalinguaggi importanti che useremo per descrivere ontologie e tesauri.
+\subsection{RDF/RDFS}
+RDF (Resource Description Framework) è un framework\footnote{asd} per il processing di metadati\footnote{esattamente come i metalinguaggi i metadati sono dati che descrivono altri dati}. RDF permette l'interoperabilità tra applicazioni che si scambiano informazioni comprensibili ad un automa.
 
+Lo scopo di RDF è quello di automatizzare il processing di risorse Web; trova quindi applicazione nella ricerca di informazioni permettendo un motore di ricerca migliore, in applicazioni che catalogano la conoscenza, per descrivere una collezione di pagine che rappresentano un unico \say{documento} logico, ecc...\cite{brickley1998resource}
 \subsection{OWL}
+L'espressività di RDF e RDFS è limitata, potendo descrivere somo predicati binari, una struttura delle classi gerarchica e proprietà anch'esse gerarchiche con un dominio e un codominio.
 
+Sono state indifviduate dal gruppo di ricerca \say{Web Ontology Working Group} una serie di casi in cui le ontologie devono poter essere descritte con linguaggi più espressivi rispeto a RDF e RDFS\cite{antoniou2009web}.
+
+Presentiamo le funzionalità aggiunte da OWL Full: la versione più espressiva\footnote{e anche più pesante computazionalmente} del linguaggio OWL; per una descrizione più approfondita del linguaggio si rimanda al documento prodotto da W3C a riguardo\footnote{https://www.w3.org/TR/2004/REC-owl-features-20040210}.
+\subsubsection{OWL Full}
+Presenta la compatibilità massima coi documenti RDF/RDFS, ha la massima espressività, ma non è un sistema decidibile e completo. Descriviamo questo con il solo scopo di fornire l'elenco più completo possibile di funzionalità aggiunte allo scopo di aumentare l'espressività di RDF/RDFS.
+
+OWL Full\footnote{come anche OWL DL} permette di:
+\begin{itemize}
+	\item definire restrizioni sui domini delle relazioni in base alla classe (si può limitare ad esempio un individuo di classe mucca a mangiare solo piante, senza applicare la stessa restrizione ad altri animali);
+	\item esprimere disgiunzione tra classi;
+	\item definire classi tramite operazioni insiemistiche tra altre classi;
+	\item definire restrizioni sulla cardinalità di una proprietà
+	\item definire caratteristiche particolari di una proprietà come transitività, riflessività, proprietà inversa, ecc...
+\end{itemize}
+
+In OWL Full è, inoltre, possibile utilizzare ogni primitiva del linguaggio OWL combinandola con le primitive del linguaggio RDF/RDFS in modo da alterarne il significato originario (applicando anche una primitiva all'altra); quest'ultima caratteristica permette a OWL Full di essere completamente compatibile con RDF/RDFS e avere espressività massima, ma lo rende anche un sistema non decidibile.
 \subsection{SKOS}
