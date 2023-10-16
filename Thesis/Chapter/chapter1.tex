@@ -105,14 +105,46 @@ Un metalinguaggio è in generale un linguaggio , o sistema di segni, naturale o 
 	\item linguaggi per descrivere le basi di conoscenza: abbiamo bisogno di un linguaggio per descrivere la struttura di una KB, per definire quali relazioni possono esserci e in generale per parlare le KB stessa; chiameremo questi ultimi metalinguaggi\footnote{questi linguaggi non ci permettono di descrivere il dominio di interesse di per sè ma descrivono come descrivere il dominio} per distinguerli dai linguaggi di programmazione e dalla conoscenza che stiamo rappresentando.
 \end{itemize}
 Presentiamo alcuni metalinguaggi importanti che useremo per descrivere ontologie e tesauri.
+\subsection{XML}
+XML (Extensible Markup Language) è un formato testuale semplice e molto flessibile, inizialmente ideato per far fronte alla pubblicazione digitale su larga scala e diventato col tempo uno strumento importantissimo per lo scambio di moltissime informazioni sul Web\cite{w3cXml}.
+
+I documenti XML servono per memorizzare elementi detti entità che contengono dati formattati e non. I dati formattati sono costituiti da due componenti: il dato stesso e una parte di markup; quest'ultimo codifica la descrizione logica e la struttura di memorizzazione del documento. XML consente di imporre regole alla struttura logica e di memorizzazione del documento\cite{world2006extensible}.
+
+Per una descrizione dettagliata delle specifiche di XML si rimanda a \cite{world2006extensible}, mentre \cite{li2005testing} illustra nei particolari caratteristiche e funzionalità dello Schema XML. Ci limitiamo qui a definire la struttura di un elemento XML: \verb|<(tag) (attr)>content</(tag)>| e a fornire un esempio di un'entità che potremmo trovare in un documento XML:
+\begin{minted}[tabsize=2, breaklines, bgcolor=bg]{XML}
+<person gender="F">
+	<name>Clara</name>
+	<children>
+		<person gender="M">
+			<name>Bob</name>
+			<children/>
+		</person>
+	</children>
+	<email>clara@lri.fr</email>
+	<tel>314-1592654</tel>
+</person>
+\end{minted}
+
+Questa entità descrive una donna di nome Clara, che ha un figlio maschio di nome Bob, attribuiamo a Clara anche un numero di telefono e una e-mail.
+
+Alla luce di questa descrizione si può provare a reinterpretare il listato \ref{lst:persone.rdf} che descrive la relazione di parentela tra Giulio Cesare e Bruto.
 \subsection{RDF/RDFS}
-RDF (Resource Description Framework) è un framework\footnote{asd} per il processing di metadati\footnote{esattamente come i metalinguaggi i metadati sono dati che descrivono altri dati}. RDF permette l'interoperabilità tra applicazioni che si scambiano informazioni comprensibili ad un automa.
+\subsubsection{RDF}
+RDF (Resource Description Framework) è un framework (architettura logica che supporta una prassi, una metodologia o un progetto\footnote{https://it.wikipedia.org/wiki/Framework}, in questo caso definisce le regole per la descrizione della conoscenza) per il processing di metadati\footnote{esattamente come i metalinguaggi i metadati sono dati che descrivono altri dati}. RDF permette l'interoperabilità tra applicazioni che si scambiano informazioni comprensibili ad un automa.
 
 Lo scopo di RDF è quello di automatizzare il processing di risorse Web; trova quindi applicazione nella ricerca di informazioni permettendo un motore di ricerca migliore, in applicazioni che catalogano la conoscenza, per descrivere una collezione di pagine che rappresentano un unico \say{documento} logico, ecc...\cite{brickley1998resource}
+
+RDF si basa sull'idea di rappresentare oggetti attraverso identificatori Web (URI\footnote{Uniform Resource Identifiers}) e di descrivere le risorse in termini di semplici proprietà e valori. I valori possono essere tipi semplici (numeri caratteri stringhe) oppure altre risorse identificate con URI.
+
+RDF permette quindi di esprimere semplici affermazioni riguardo risorse attraverso grafi i cui nodi rappresentano risorse e i cui archi rappresentano proprietà e valori\cite{manola2004rdf}.
+\subsubsection{RDFS}
+Uno Schema RDF definisce quali siano le proprietà valide che si possono esprimere in una particoloare descrizione con RDF; permette inoltre di imporre caratteristiche o restrizioni alle proprietà e ai valori che queste possono assumere. Per identificare uno Schema RDF viene usato il meccanismo dei namespace XML\footnote{Una serie di nomi, identificati da un URI usati in un documento XML come tipi di un elemento e nomi di attributi\cite{bray1999namespaces}}.
+
+Interpretare uno Schema RDF significa attribuire un valore semantico ad ogni proprietà presente nella descrizione RDF, questo significa che anche se un'applicazione non è in grado di capire lo schema può comunque ricostruire il grafo di risorse descritto da RDF\cite{miller1998introduction}.
 \subsection{OWL}
 L'espressività di RDF e RDFS è limitata, potendo descrivere somo predicati binari, una struttura delle classi gerarchica e proprietà anch'esse gerarchiche con un dominio e un codominio.
 
-Sono state indifviduate dal gruppo di ricerca \say{Web Ontology Working Group} una serie di casi in cui le ontologie devono poter essere descritte con linguaggi più espressivi rispeto a RDF e RDFS\cite{antoniou2009web}.
+Sono state individuate dal gruppo di ricerca \say{Web Ontology Working Group} una serie di casi in cui le ontologie devono poter essere descritte con linguaggi più espressivi rispeto a RDF e RDFS\cite{antoniou2009web}.
 
 Presentiamo le funzionalità aggiunte da OWL Full: la versione più espressiva\footnote{e anche più pesante computazionalmente} del linguaggio OWL; per una descrizione più approfondita del linguaggio si rimanda al documento prodotto da W3C a riguardo\footnote{https://www.w3.org/TR/2004/REC-owl-features-20040210}.
 \subsubsection{OWL Full}

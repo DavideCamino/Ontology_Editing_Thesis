@@ -24,7 +24,6 @@ Una volta definita la struttura del documento possiamo definire delle funzioni c
 \subsection{Esempio}
 Consideriamo nuovamente l'ontologia padri-figli con struttura definita in \ref{lst:persone.cd} e costruiamo 2 funzioni, la prima (chiamata \verb|name|) che permetta di estrarre da un individuo tutti i nomi, la seconda (chiamata \verb|names|) che usi la prima per costruire una lista con tutti i nomi contenuti nell'ontologia.
 \addocaml{basic functions}{lst:basic_functions.cd}{Code/basic_func.cd}
-
 Nella prima funzione, usando il pattern matching, lego la variabile \verb|n| alla sequenza di tutti gli elementi di tipo \verb|Name| associati a quell'individuo, poi uso \verb|map| per estrarre da ogni elemento di questa lista solo la stringa col nome.
 
 Nella seconda funzione uso \verb|transform| per selezionare dalla lista \verb|x| (lista di elementi tipo \verb|Thing|) solo gli elementi \verb|Individual|, a questi applico la funzione \verb|name| sopra definita. La seconda clausola di \verb|transform|, che serve a buttare via tutti gli elementi di cui non si è ancora fatto il match è implicita e può essere quindi omessa.
@@ -67,7 +66,7 @@ Facendo sempre riferimento all'ontologia con struttura definita nel listato \ref
 \addocaml{basic Query}{lst:basic_query.cd}{"Code/query.cd"}
 La query crea una lista di elementi di tipo \verb|Name| a cui si assegna il nome \verb|sel|, questa lista viene poi trasformata in una lista di stringhe grazie alla \verb|map|. La proiezione fa esattamente la stessa cosa in modo ancora più conciso. Sia nella forma del \verb|select from| sia nella forma delle proiezioni si possono usare anche espressioni per fare il match oltre che tipi, come si vede nella \verb|projection 2|.
 
-Gli ultimi due esempi mostrano come \cduce possa aiutare nella rilevazione degli errori: se eseguiti restituiscono rispettivamente gli avvertimenti: \verb|Warning: This projection always returns the empty sequence| e \verb|Warning: This branch is not used|, informandoci che il risultato sarà sempre vuoto.
+Gli ultimi due esempi mostrano come \cduce possa aiutare nella rilevazione degli errori: se eseguiti restituiscono rispettivamente gli avvertimenti: \texttt{Warning: This projection always returns the empty sequence} e \texttt{Warning: This branch is not used}, informandoci che il risultato sarà sempre vuoto.
 
 Analizziamo il primo errore. \cduce sa che, affinché il risultato possa contenere dei valori, gli elementi della lista chiamata \verb|ontology| (che sono di tipo \verb|Thing|) devono essere sottotipi di \verb|[<_ ..>[Any* Name Any*] *]|; dato che non è così, il risultato sarà sempre vuoto.
 
