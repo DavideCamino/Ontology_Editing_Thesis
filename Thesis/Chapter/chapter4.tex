@@ -7,19 +7,34 @@ In questo capitolo vediamo come sia possibile usare \cduce per fare il merge di 
 Adesso che abbiamo creato un ontologia a partire dall'\say{European Fashion Thesaurus} e abbiamo descritto una semplice ontologia per descrivere persone, vorremmo fonderle in una nuova ontologia che possa parlare degli usi e costumi della società, magari riferita ad un ben preciso periodo storico. Vogliamo creare un'ontologia in cui sia possibile rappresentare delle persone, coi rispettivi legami di parentela e nella quale sia possibile associare alle persone uno status sociale, un lavoro e uno specifico abbigliamento.
 \subsection{Ontologie di partenza}
 Per creare questa ontologia consideriamo 3 ontologie di partenza:
-\begin{itemize}
-	\item \verb|society|: è lo scheletro dell'ontologia che vogliamo ottenere: è comodo crearla a priori in modo da non dover creare ex novo tutta la struttura in \cduce, inizialmente rappresenta delle persone sulle quali definiamo le relazioni \verb|born_in|, \verb|is| e \verb|work_as| che associano una persona con la città di nascita, con il suo status sociale e con il proprio lavoro;
-	\item \verb|people|: rappresenta gli individui con le loro parentele: rispetto all'ontologia presentata in \ref{lst:persone.rdf} abbiamo aggiunto la relazione simmetrica \verb|marry|, e la relazione \verb|son_of| come inversa di \verb|parent_of|, aggiungiamo anche l'anno di nascita;
-	\phantomsection\label{ont_fashion}
-	\item \verb|fashion|: è l'ontologia che abbiamo creato nel capitolo \ref{ch3} arricchita con le relazioni \verb|made_of|, \verb|crafted_with|, \verb|color|, che indicano rispettivamente i materiali costituenti, le tecniche realizzative e i colori di un capo d'abbigliamento.
-\end{itemize}
+
+\verb|society|: è lo scheletro dell'ontologia che vogliamo ottenere: è comodo crearla a priori in modo da non dover creare ex novo tutta la struttura in \cduce, inizialmente rappresenta delle persone sulle quali definiamo le relazioni \verb|born_in|, \verb|is| e \verb|work_as| che associano una persona con la città di nascita, con il suo status sociale e con il proprio lavoro;
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Picture/society.rdf.pdf}
+	\caption{grafo ontologia \texttt{society}}
+\end{figure}
+
+\verb|people|: rappresenta gli individui con le loro parentele: rispetto all'ontologia presentata in \ref{lst:persone.rdf} abbiamo aggiunto la relazione simmetrica \verb|marry|, e la relazione \verb|son_of| come inversa di \verb|parent_of|, aggiungiamo anche l'anno di nascita e morte.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Picture/people.2.pdf}
+	\caption{grafo ontologia \texttt{people}}
+\end{figure}
+
+\phantomsection\label{ont_fashion}
+\verb|fashion|: è l'ontologia che abbiamo creato nel capitolo \ref{ch3} arricchita con le relazioni \verb|made_of|, \verb|crafted_with|, \verb|color|, che indicano rispettivamente i materiali costituenti, le tecniche realizzative e i colori di un capo d'abbigliamento. Anche di questa ontologia presentiamo il grafo, l'ontologia ha moltissime classi, per non creare un grafo inutilmente complesso lo tagliamo ad una certa profondità\footnote{dall'immagine sembrano esserci classi orfane o fibre che non sono sottoclasse di materiali, questa è un'imprecisione dovuta al fatto che WebVOWL non lavora esattamente tagliando il grafo ad una certa profondità, ma collassa molte classi in una singola, questo produce effetti indesiderati. Se si rappresentasse l'ontologia con tutte le classi si apprezzerebbe la struttura corretta, ma il grafo sarebbe illeggibile}. Per rendere ulteriormente più chiara l'immagine abbiamo colorato in rosso le classi principali (oggetti di moda, colori e materiali). 
+\begin{figure}[H]
+	\centering
+	\label{fig_eur}
+	\includegraphics[width=0.5\textwidth]{Picture/europeana_formatted.rdf.pdf}
+	\caption{grafo ontologia \texttt{europeana}}
+\end{figure}
 \subsection{Ontologia di arrivo}
 Vogliamo modificare \verb|society| in modo da descrivere gli usi e i costumi della società del XII secolo, per fare questo estrapoliamo dall'ontologia \verb|fashion| tutti i vestiti che non siano costituiti da fibre artificiali e scremiamo dall'ontologia \verb|people| tutte le persone che sono vissute in un'epoca che non ci interessa. Vogliamo poi che la classe \verb|People| definita in \verb|society| sia equivalente alla classe \verb|People| definita in \verb|people|, senza perdere tutte le relazioni di parentela, e potendo contemporaneamente sfruttare le nuove relazioni definite in \verb|society|.
-
 \section{Struttura generica di un'ontologia}
 Per fare il merge dobbiamo poter caricare le 3 ontologie in \cduce, quindi descriviamo una struttura generale per fare il parsing di un'ontologia generica:
 \addocaml{general structure}{lst:general_structure}{Code/general_structure.cd}
-\newpage
 Rispetto alle strutture definite in precedenza notiamo varie aggiunte:
 \begin{itemize}
 	\item si specifica meglio l'elemento \verb|EqClass|: questo infatti può essere una restrizione (un genitore è una persona con dei figli) oppure un'equivalenza senza condizioni (ci serve per rendere uguali i concetti di persona definiti nelle 2 ontologie);
@@ -74,6 +89,14 @@ Alla riga 17 prendiamo tutti gli elementi dell'ontologia \verb|society| escluso 
 In questo esempio prendiamo tutti gli elementi dell'ontologia \verb|people|; come detto prima, presentare il codice per selezionare solo alcune persone sarebbe poco istruttivo. Una volta create tutte le nuove liste di elementi le assembliamo alla riga 26 e, alla riga 28 costruiamo la nuova ontologia; in riga 30 la salviamo su file.
 \subsection{Risultato finale}
 L'ontologia che abbiamo costruito permette di descrivere la società nelle modalità che ci eravamo prefissati all'inizio del capitolo (\ref{ch4.1}), inoltre abbiamo importato già tutte le persone che avevamo modellato nell'ontologia \verb|people| mantenendo le loro relazioni di parentela; possiamo definire nuove relazioni di parentela sulle persone già modellate in \verb|society| (oppure attribuire loro una data di nascita) e usare le relazioni definite in \verb|society| per arricchire la descrizione di un individuo presente in \verb|people|. Abbiamo anche importato tutte le classi di vestiti e tutti i materiali naturali dall'ontologia \verb|fashion|, possiamo ora creare nuove relazioni tra persone e vestiario  per aggiungere informazioni sugli usi e costumi della società che intendiamo descrivere.
+
+Del risultato finale riportiamo solo la parte di grafo che descrive le persone, la parte che descrive il vestiario è esattamente uguale a quella riportata in \ref{fig_eur} alla quale togliamo le fibre artificiali. Il grafo che descrive le persone ci fa apprezzare come effettivamente le due classi estratte una dall'ontologia \verb|society| e l'altra dall'ontologia \verb|people| siano effettivamente state accorpate\footnote{in realtà rimangono due classi ma sono dichiarate equivalenti} in un unica classe che possiede tutti gli attributi e le relazioni delle due classi di partenza.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Picture/society_merged.rdf.pdf}
+	\caption{grafo ontologia \texttt{society merged}}
+\end{figure}
+
 \section{In Protégé}
 In potégé esiste un comando per fare il merge di ontologie, una volta aperte tutte le ontologie che siamo interessati a fondere possiamo farne il merge e Protégé si occupa di creare una nuova ontologia e inserire tutte le classi, gli individui, le relazioni e le proprietà di tutte le ontologie di partenza. 
 

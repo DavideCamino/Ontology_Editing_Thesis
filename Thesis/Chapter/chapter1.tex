@@ -22,13 +22,12 @@ Nel contesto del web semantico\footnote{Un'estensione del World Wide Web in cui 
 \subsubsection{Esempio}
 Consideriamo una semplice ontologia che rappresenta persone con legami di parentela genitore-figlio; le persone hanno uno o più nomi salvat nel tag \verb|comment|. Modelliamo questa ontologia con una classe \verb|Persone| e una sottoclasse \verb|Genitori| (i cui individui sono \verb|Persone| che realizzano la relazione \verb|genitoreDi|). Creiamo la relazione \verb|genitoreDi|. Infine popoliamo l'ontologia con alcuni individui. Il risultato ottenuto con Protégé è un documento XML di questo tipo:
 \addxml{persone.rdf}{lst:persone.rdf}{Code/persone.rdf}
-\begin{wrapfigure}{r}{0.5\textwidth}
+Per quanto non sia impossibile leggere la struttura e i dati dal listato precedente un modo naturale per rappresentare le ontologie è sotto forma di grafi. Qui vediamo il grafo\footnote{tutti i grafi presenti un questo elaborato sono stati ottenuti grazie a http://vowl.visualdataweb.org/webvowl.html} che mostra la struttura dell'ontologia e possiamo apprezzare quanto sia semplice la sua struttura rispetto a quello che avremmo potuto immaginare dal listato \ref{lst:persone.rdf}. Nel grafo non sono rappresentati gli individui, possiamo comunque leggere quanti ve ne sono per ogni classe (in questo caso un individuo di tipo \verb|Persone| e uno di tipo \verb|Genitori|)
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{Picture/persone.rdf.pdf}
 	\caption{Grafo dell'ontologia persone}
-\end{wrapfigure}
-
-Per quanto non sia impossibile leggere la struttura e i dati dal listato precedente un modo naturale per rappresentare le ontologie è sotto forma di grafi. Qui vediamo il grafo\footnote{tutti i grafi presenti un questo elaborato sono stati ottenuti grazie a http://vowl.visualdataweb.org/webvowl.html} che mostra la struttura dell'ontologia e possiamo apprezzare quanto sia semplice la sua struttura rispetto a quello che avremmo potuto immaginare dal listato \ref{lst:persone.rdf}. Nel grafo non sono rappresentati gli individui, possiamo comunque leggere quanti ve ne sono per ogni classe (in questo caso un individuo di tipo \verb|Persone| e uno di tipo \verb|Genitori|)
+\end{figure}
 
 
 \subsection{Tesauri}
@@ -124,7 +123,6 @@ Per una descrizione dettagliata delle specifiche di XML si rimanda a \cite{world
 	<tel>314-1592654</tel>
 </person>
 \end{minted}
-
 Questa entità descrive una donna di nome Clara, che ha un figlio maschio di nome Bob, attribuiamo a Clara anche un numero di telefono e una e-mail.
 
 Alla luce di questa descrizione si può provare a reinterpretare il listato \ref{lst:persone.rdf} che descrive la relazione di parentela tra Giulio Cesare e Bruto.
@@ -159,5 +157,10 @@ OWL Full\footnote{come anche OWL DL} permette di:
 	\item definire caratteristiche particolari di una proprietà come transitività, riflessività, proprietà inversa, ecc...
 \end{itemize}
 
-In OWL Full è, inoltre, possibile utilizzare ogni primitiva del linguaggio OWL combinandola con le primitive del linguaggio RDF/RDFS in modo da alterarne il significato originario (applicando anche una primitiva all'altra); quest'ultima caratteristica permette a OWL Full di essere completamente compatibile con RDF/RDFS e avere espressività massima, ma lo rende anche un sistema non decidibile.
+In OWL Full è, inoltre, possibile utilizzare ogni primitiva del linguaggio OWL combinandola con le primitive del linguaggio RDF/RDFS in modo da alterarne il significato originario (applicando anche una primitiva all'altra).
 \subsection{SKOS}
+SKOS (Simple Knowledge Organization System) è un modello basato su RDF che permette di esprimere la struttura base e il contenuto di schemi concettuali come tesauri, tassonomie e altri tipi di vocabolari affini\cite{isaac2009skos}.
+
+In SKOS i concetti possono essere identificati con URI, etichettati con stringhe di caratteri in una o più lingue, descritti con delle annotazioni, associati ad altri concetti o organizzati in strutture gerarchiche informali\cite{miles2009skos}.
+
+Più avanti vedremo che questo linguaggio è stato usato per descrivere il tesauro \say{Eurpeana Fashion Thesaurus}, questo tesauro è facilmente reperibile online ed è ottimo per i nostri esperimenti di editing (ne parleremo in \ref{ch3}).
