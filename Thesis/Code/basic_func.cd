@@ -2,6 +2,7 @@
 let fun name (Individual -> [String *])
 	<owl:NamedIndividual ..> [ (n::Name | _) * ] -> map n with 
 		<rdfs:comment> s -> s;;
+		
 (*second function*)	
 let fun names (Ontology -> [String *])
 	<rdf:RDF ..> x -> transform x with
