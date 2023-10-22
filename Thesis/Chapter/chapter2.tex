@@ -1,6 +1,6 @@
 \chapter{Strumenti offerti da \cduce}\label{ch2}
 \section{Introduzione}
-In questo capitolo analizziamo brevemente gli strumenti principali offerti da \cduce per l'editing di documenti XML. La trattazione vale per un qualsiasi documento XML, ma negli esempi ci concentreremo sulle ontologie vedendo dei primi comandi per trattare ontologie dalla semplice struttura. 
+In questo capitolo analizziamo brevemente gli strumenti principali offerti da \cduce per l'editing di documenti XML. La trattazione vale per un qualsiasi documento XML, ma negli esempi ci concentreremo sulle ontologie analizzando i primi comandi per trattare ontologie dalla semplice struttura. 
 
 
 \section{Parsing di documenti XML}
@@ -10,9 +10,9 @@ In \cduce possiamo ricostruire tale struttura definendo dei tipi. La forma gener
 \subsection{Esempio}
 Torniamo all'esempio dell'ontologia di persone definita nel listato \ref{lst:persone.rdf} e descriviamo in \cduce la sua struttura.
 \addocaml{persone.cd}{lst:persone.cd}{Code/persone.cd}
-Si definiscono (linea 1 a 6) i NameSpace in modo che \cduce li possa correttamente interpetare nel resto del documento. Si passa poi alla struttura vera e propria del file: tutte le informazioni sono contenute nell'elemento di tipo \verb|Ontology| che è costituito da un tag e da una lista di elementi di tipo \verb|Thing| che a sua volta può rappresentare un elemento di tipo \verb|Ont|, \verb|Property|, \verb|Class| o \verb|Individual|. Ognuno di questi elementi fa il match con un nodo figlio del nodo root del documento XML; a loro volta questi elementi hanno una struttura interna che può essere più o meno dettagliata a seconda di come ci interessa operare sul documento. È interessante notare che, dato che in questo caso le specifiche proprietà della restrizione di un elemento \verb|EqClass| non ci interessano, abbiamo potuto fare il match di queste con un vettore di lunghezza arbitraria (anche nulla) di generici elementi XML. Se avessimo voluto specificare che il tag restrizione contiene esattamente 2 elementi senza specificare quali avremmo potuto scrivere \verb|<owl>Restriction> [AnyXml AnyXml]|.
+Si definiscono (linea 1 a 6) i NameSpace in modo che \cduce li possa correttamente interpetare nel resto del documento. Si passa poi alla struttura vera e propria del file: tutte le informazioni sono contenute nell'elemento di tipo \verb|Ontology| che è costituito da un tag e da una lista di elementi di tipo \verb|Thing| che a sua volta può rappresentare un elemento di tipo \verb|Ont|, \verb|Property|, \verb|Class| o \verb|Individual|. Ognuno di questi elementi fa il match con un nodo figlio del nodo root del documento XML; a loro volta questi elementi hanno una struttura interna che può essere più o meno dettagliata a seconda di come ci interessa operare sul documento. È interessante notare che, dato che in questo caso le specifiche proprietà della restrizione di un elemento \verb|EqClass| non ci interessano, abbiamo potuto fare il match di queste con un vettore di lunghezza arbitraria (anche nulla) di generici elementi XML. Se avessimo voluto specificare che il tag restrizione contiene esattamente 2 elementi senza specificare quali, avremmo potuto scrivere \verb|<owl>Restriction> [AnyXml AnyXml]|.
 
-Quando andremo a caricare il documento con il comando alla riga 26, \cduce carica il file ed esegue il controllo di tipo verificando che la struttura del file XML sia effettivamente quella descritta dall'elemento \verb|Ontology|; se il controllo va a buon fine otterremo l'elemento chiamato \verb|ontology| di tipo \verb|Ontology| contenente tutto il file XML.
+Quando andremo a caricare il documento con il comando alla riga 26, \cduce carica il file ed esegue il controllo di tipo verificando che la struttura del file XML sia effettivamente quella descritta dall'elemento \verb|Ontology|; se il controllo va a buon fine, otterremo l'elemento chiamato \verb|ontology| di tipo \verb|Ontology| contenente tutto il file XML.
 \section{Manipolare documenti XML}
 Una volta definita la struttura del documento possiamo definire delle funzioni che mappano un elemento in un altro elemento. Gli strumenti fondamentali sono:
 \begin{itemize}
@@ -25,7 +25,7 @@ Consideriamo nuovamente l'ontologia padri-figli con struttura definita in \ref{l
 \addocaml{basic functions}{lst:basic_functions.cd}{Code/basic_func.cd}
 Nella prima funzione, usando il pattern matching, si lega la variabile \verb|n| alla sequenza di tutti gli elementi di tipo \verb|Name| associati a quell'individuo, poi si usa \verb|map| per estrarre da ogni elemento di questa lista solo la stringa col nome.
 
-Nella seconda funzione si usa \verb|transform| per selezionare dalla lista \verb|x| (lista di elementi tipo \verb|Thing|) solo gli elementi \verb|Individual|, a questi si applica la funzione \verb|name| sopra definita. La seconda clausola di \verb|transform|, che serve a scartare tutti gli elementi di cui non si è ancora fatto il match è implicita e può essere quindi omessa.
+Nella seconda funzione si usa \verb|transform| per selezionare dalla lista \verb|x| (lista di elementi tipo \verb|Thing|) i soli elementi \verb|Individual|, a questi si applica la funzione \verb|name| sopra definita. La seconda clausola di \verb|transform|, che serve a scartare tutti gli elementi di cui non si è ancora fatto il match, è implicita e può essere quindi omessa.
 
 La prima funzione ci ha permesso di passare da una lista \verb|n| di elementi \verb|Name| ad una lista della stessa lunghezza di stringhe. La seconda ci ha permesso di passare da una lista di elementi \verb|Thing| a una lista di elementi \verb|Individual| di differente lunghezza (questa lista viene poi trasformata in una lista di stringhe usando la funzione \verb|name|).
 \section{Query}
@@ -41,7 +41,7 @@ where c
 \end{minted}
 Dove \verb|e| ed \verb|ei| sono espressioni, \verb|pi| sono pattern e \verb|c| è un'espressione booleana. Il risultato finale è la lista di tutti i valori ottenuti valutando \verb|e| nella sequenza di possibili combinazioni in cui le variabili libere di \verb|e| sono legate facendo il match dei pattern \verb|pi| con le espressioni \verb|ei|, a condizione che \verb|c| sia rispettata.
 
-Le Query possono essere simulate con \verb|transform| che permette di creare, grazie a pattern matching successivi l'espressione \verb|e| e di selezionarla solo nel caso in cui l'espressione booleana \verb|b| sia rispettata. Si può riscrivere la generica Query usando la \verb|transform| come segue:
+Le Query possono essere simulate con \verb|transform| che permette di creare, grazie a pattern matching successivi, l'espressione \verb|e| e di selezionarla solo nel caso in cui l'espressione booleana \verb|b| sia rispettata. Si può riscrivere la generica Query usando la \verb|transform| come segue:
 \begin{minted}[tabsize=2, bgcolor=bg]{OCaml}
 transform e1 with p1 -> 
 	transform e2 with p2 -> 
@@ -63,13 +63,13 @@ Oltre che con la struttura del \say{\texttt{select from}} le Query possono esser
 \subsection{Esempio}
 Facendo sempre riferimento all'ontologia con struttura definita nel listato \ref{lst:persone.cd} scriviamo delle Query per ottenere lo stesso risultato della seconda funzione definita nel listato \ref{lst:basic_functions.cd}
 \addocaml{basic Query}{lst:basic_query.cd}{"Code/query.cd"}
-La query crea una lista di elementi di tipo \verb|Name| a cui si assegna il nome \verb|sel|, questa lista viene poi trasformata in una lista di stringhe grazie alla \verb|map|. La proiezione fa esattamente la stessa cosa in modo ancora più conciso. Sia nella forma del \say{\texttt{select from}} sia nella forma delle proiezioni si possono usare anche espressioni per fare il match (oltre che tipi), come si vede nella \verb|projection 2| (linea 11).
+La query crea una lista di elementi di tipo \verb|Name| a cui si assegna il nome \verb|sel|, questa lista viene poi trasformata in una lista di stringhe grazie alla \verb|map|. La proiezione fa esattamente la stessa cosa in modo ancora più conciso. Sia nella forma del \say{\texttt{select from}}, sia nella forma delle proiezioni, si possono usare anche espressioni per fare il match (oltre che tipi), come si vede nella \verb|projection 2| (linea 11).
 
 Gli ultimi due esempi (linee 14 e 17) mostrano come \cduce possa aiutare nella rilevazione degli errori: se eseguiti restituiscono rispettivamente gli avvertimenti: \texttt{Warning: This projection always returns the empty sequence} e \texttt{Warning: This branch is not used}, informandoci che il risultato sarà sempre vuoto.
 
-Analizziamo il primo errore. \cduce sa che, affinché il risultato possa contenere dei valori, gli elementi della lista chiamata \verb|ontology| (che sono di tipo \verb|Thing|) devono essere sottotipi di \verb|[<_ ..>[Any* Name Any*] *]|; dato che non è così, il risultato sarà sempre vuoto.
+Analizziamo il primo errore. \cduce sa che, affinché il risultato possa contenere dei valori, gli elementi della lista chiamata \verb|ontology| (che sono di tipo \verb|Thing|) devono essere sottotipi di \verb|[<_ ..>[Any* Name Any*] *]|; dato che così non è, il risultato sarà sempre vuoto.
 
-Il secondo errore è dovuto al fatto che mettendo le parentesi quadre intorno a \verb|sel| (linea 20) questo viene interpetato come una sequenza (anche se lo è già), ne risulta una sequenza il cui unico elemento è una sequenza (in paticolare il tipo attribuito da \cduce è \verb|[ [ Individual* ] ]|) anche in questo caso controllando il tipo \cduce è in grado di capire che il risultato sarà sempre vuoto. Perché la Query restituisca dei valori il tipo deve essere \verb|[ Individual* ]|, cosa che avviene nella Query (linea 22) successiva che in effetti restituisce il risultato atteso.
+Il secondo errore è dovuto al fatto che mettendo le parentesi quadre intorno a \verb|sel| (linea 20) questo viene interpretato come una sequenza (anche se lo è già); ne risulta una sequenza il cui unico elemento è una sequenza (in paticolare il tipo attribuito da \cduce è \verb|[ [ Individual* ] ]|). Anche in questo, caso controllando il tipo, \cduce è in grado di capire che il risultato sarà sempre vuoto. Perché la Query restituisca dei valori, il tipo deve essere \verb|[ Individual* ]|, cosa che avviene nella Query successiva (linea 22) che in effetti restituisce il risultato atteso.
 
 \section{Conclusioni}
 Abbiamo visto come si può descrivere la struttura di un documento XML in \cduce, come si può trasformare un elemento di un tipo in elemento di un altro tipo e come creare liste selezionando quali elementi aggiungere. Nei capitoli \ref{ch3} e \ref{ch4} applicheremo gli strumenti analizzati ad esempi notevoli che mostrino in che modo e in che contesti \cduce possa essere usato per operare, modificandoli, tesauri e ontologie
