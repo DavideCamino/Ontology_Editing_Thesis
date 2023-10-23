@@ -21,11 +21,17 @@
 \usepackage{xstring}
 \usepackage{hyperref}
 \usepackage{xspace} 
-\sloppy
+\usepackage[backend=bibtex, maxbibnames=10, minalphanames=3]{biblatex}
 
-\usepackage[backend=bibtex, maxbibnames=10,
-minalphanames=3]{biblatex}
+
 \bibliography{Biblio/biblio} 
+\sloppy
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	urlcolor=blue,
+	pdfpagemode=FullScreen,
+}
 
 
 \title{Editing di ontologie tramite il linguaggio di programmazione funzionale \cduce}
@@ -62,7 +68,7 @@ minalphanames=3]{biblatex}
 	\input{Chapter/abstract}
 	\cleardoublepage
 	\input{Chapter/blanknum}
-	\tableofcontents
+	\input{Chapter/index}
 	\cleardoublepage
 	\pagenumbering{arabic}
 	\input{Chapter/chapter1}	
@@ -71,9 +77,6 @@ minalphanames=3]{biblatex}
 	\input{Chapter/chapter4}
 	\input{Chapter/chapter5}
 	\newpage
-	
-	\listoflistings
-	
-	\printbibliography
-	
+	\input{Chapter/listing}
+	\printbibliography	
 \end{document}

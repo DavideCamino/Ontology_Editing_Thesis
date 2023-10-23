@@ -16,7 +16,7 @@ In accordo con una definizione ampiamente accettata \cite{hitzler2021review} un'
 
 La definizione è ancora un po' vaga, più precisamente, un'ontologia è una base di conoscenza che permette di descrivere concetti e relazioni tra di essi, specificando questi oggetti tramite un linguaggio di rappresentazione della conoscenza basato su una logica formale.
 \subsubsection{Scopo delle ontologie}
-Nel contesto del web semantico\footnote{Un'estensione del World Wide Web in cui le informazioni siano comprensibili ad un automa\cite{berners2001new}}, le ontologie sono il mezzo principale per condividere, integrare e scoprire dati\cite{hitzler2021review}.
+Nel contesto del web semantico\footnote{Un'estensione del World Wide Web in cui le informazioni siano comprensibili a un automa\cite{berners2001new}}, le ontologie sono il mezzo principale per condividere, integrare e scoprire dati\cite{hitzler2021review}.
 \subsubsection{Manipolare ontologie}
  Dato lo scopo delle ontologie, la possibilità di riutilizzare, modificare e ampliare ontologie esistenti risulta essere un argomento centrale. Spesso le basi di conoscenza sono sì strutturate, ma sono eterogenee e non permettono interoperabilità. Scopo di questo lavoro è quello di presentare degli strumenti per manipolare basi di conoscenza (ci concentriamo su tesauri e ontologie) operando in modo tale da rendere compatibili informazioni tratte da fonti differenti. 
  
@@ -24,7 +24,7 @@ Nel contesto del web semantico\footnote{Un'estensione del World Wide Web in cui 
 \subsubsection{Esempio}
 Consideriamo una semplice ontologia che rappresenta persone con legami di parentela genitore-figlio; le persone hanno uno o più nomi salvati nel tag \verb|comment|. Modelliamo questa ontologia con una classe \verb|Persone| e una sottoclasse \verb|Genitori| (i cui individui sono \verb|Persone| che realizzano la relazione \verb|genitoreDi|). Creiamo la relazione \verb|genitoreDi|. Infine popoliamo l'ontologia con alcuni individui. Il risultato ottenuto con Protégé è un documento XML di questo tipo:
 \addxml{persone.rdf}{lst:persone.rdf}{Code/persone.rdf}
-Per quanto non sia impossibile leggere la struttura e i dati dal listato precedente, un modo naturale per rappresentare le ontologie è sotto forma di grafi. Qui vediamo il grafo\footnote{Tutti i grafi presenti un questo elaborato sono stati ottenuti grazie a http://vowl.visualdataweb.org/webvowl.html} che mostra la struttura dell'ontologia e possiamo apprezzare quanto sia semplice la sua struttura rispetto a quello che avremmo potuto immaginare dal listato \ref{lst:persone.rdf}. Nel grafo non sono rappresentati gli individui, possiamo comunque leggere quanti ve ne sono per ogni classe (in questo caso un individuo di tipo \verb|Persone| e uno di tipo \verb|Genitori|)
+Per quanto non sia impossibile leggere la struttura e i dati dal listato precedente, un modo naturale per rappresentare le ontologie è sotto forma di grafi. Qui vediamo il grafo\footnote{Tutti i grafi presenti un questo elaborato sono stati ottenuti grazie a \url{http://vowl.visualdataweb.org/webvowl.html}} che mostra la struttura dell'ontologia e possiamo apprezzare quanto sia semplice la sua struttura rispetto a quello che avremmo potuto immaginare dal listato \ref{lst:persone.rdf}. Nel grafo non sono rappresentati gli individui, possiamo comunque leggere quanti ve ne sono per ogni classe (in questo caso un individuo di tipo \verb|Persone| e uno di tipo \verb|Genitori|)
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{Picture/persone.rdf.pdf}
@@ -34,19 +34,19 @@ Per quanto non sia impossibile leggere la struttura e i dati dal listato precede
 
 \subsection{Tesauri}
 \subsubsection{Definizione}
-Nella loro accezione più generale possibile, i tesauri sono risorse nelle quali termini affini sono raggruppati assieme\cite{kilgarriff2000s}. In particolare un tesauro fornisce un vocabolario preciso e controllato rispetto ad un particolare dominio di interesse.\cite{srinivasan1992thesaurus} Queste strutture possono aiutare il ricercatore a riformulare le strategie di ricerca fornendo una serie di sinonimi, contrari, definizioni e traduzioni in altre lingue del termine cercato.
+Nella loro accezione più generale possibile, i tesauri sono risorse nelle quali termini affini sono raggruppati assieme\cite{kilgarriff2000s}. In particolare un tesauro fornisce un vocabolario preciso e controllato rispetto a un particolare dominio di interesse.\cite{srinivasan1992thesaurus} Queste strutture possono aiutare il ricercatore a riformulare le strategie di ricerca fornendo una serie di sinonimi, contrari, definizioni e traduzioni in altre lingue del termine cercato.
 
-Esistono diversi tipi di tesauro in base alle modalità di costruzione e fruizione \cite{kilgarriff2000s}: nel nostro caso il tesauro sarà costituito da un vocabolario tassonomico in cui le relazioni tra oggetti sono di tipo BT (broader term), cioè ogni concetto può avere un riferimento ad un concetto più generale, formando in questo modo una struttura ad albero. 
+Esistono diversi tipi di tesauro in base alle modalità di costruzione e fruizione \cite{kilgarriff2000s}: nel nostro caso il tesauro sarà costituito da un vocabolario tassonomico in cui le relazioni tra oggetti sono di tipo BT (broader term), cioè ogni concetto può avere un riferimento a un concetto più generale, formando in questo modo una struttura ad albero. 
 \subsubsection{Espressività}
 Come si può immaginare, il potere espressivo di un tesauro è inferiore a quello di un'ontologia che non pone alcun limite alle relazioni definibili tra individui. In un tesauro inoltre ogni concetto ha, al più, un genitore, mentre in un'ontologia possiamo creare una classe che erediti le caratteristiche da più classi distinte.
 \section{Strumenti di editing}
 
 \subsection{Protégé}
-Protégé\footnote{https://protege.stanford.edu/} è uno strumento per la modellazione della conoscenza molto conosciuto; è un progetto open-source sviluppato all'università di Stanford e permette la manipolazione interattiva di ontologie e KB attraverso un'interfaccia grafica e delle API java.
+Protégé\footnote{\url{https://protege.stanford.edu/}} è uno strumento per la modellazione della conoscenza molto conosciuto; è un progetto open-source sviluppato all'università di Stanford e permette la manipolazione interattiva di ontologie e KB attraverso un'interfaccia grafica e delle API java.
 
 Le funzionalità di Protégé possono essere aumentate grazie a dei componenti plug-in il cui numero è in continua crescita. Questi plug-in offrono nuovi metodi per la gestione delle ontologie, supporto per dati multimediali, engines per il ragionamento automatico e per l'interrogazione delle basi di conoscenza\cite{sivakumar2011ontology}.
 \subsubsection{Descrizione del software}
-Protégé presenta un'interfaccia con numerose schede, ogni scheda permette all'utente di accedere ad una differente funzionalità del software. Le schede base consentono di aggiungere nuova conoscenza e di effettuare ricerche nella KB.
+Protégé presenta un'interfaccia con numerose schede, ogni scheda permette all'utente di accedere a una differente funzionalità del software. Le schede base consentono di aggiungere nuova conoscenza e di effettuare ricerche nella KB.
 
 Uno degli obbiettivi fondamentali di Protégé è quello di rendere l'inserimento e la ricerca in una base di conoscenza il più semplice possibile: mentre il sistema genera uno strumento per l'acquisizione della conoscenza, l'utente aggiunge informazioni riempiendo form intuitivi, selezionando elementi da liste e disegnando diagrammi.
 
@@ -65,13 +65,13 @@ XDuce permette di manipolare unicamente documenti XML: questa sua specificità m
 
 In \cduce è possibile creare complesse strutture dati, modellare il tipo di documenti XML, e interfacciarsi in modo relativamente semplice con altri linguaggi di programmazione\cite{cduceLanguage}.
 \subsection{Feature}\label{fature_cduce}
-Vediamo brevemente le principali feature di \cduce, non entreremo nel dettaglio essendo presente una guida dettagliata sul sito del progetto\footnote{https://www.cduce.org/}
+Vediamo brevemente le principali feature di \cduce, non entreremo nel dettaglio essendo presente una guida dettagliata sul sito del progetto\footnote{\url{https://www.cduce.org/}}
 \subsubsection{Verifica statica dei tipi}
 Il sistema di tipi è un componente centrale di \cduce; dal punto di vista pratico un tipo è un insieme di valori identificati da un'espressione sintattica: questa descrizione permette di definire in modo naturale (come insiemi matematici) relazioni di sottotipo, connettivi logici nell'algebra dei tipi ed equivalenza di tipi.
 
-I tipi ricoprono un ruolo importante anche nella parte statica del linguaggio: la correttezza di ogni trasformazione definita in \cduce è garantita staticamente. Inoltre in \cduce il pattern matching viene effettuato attraverso un'esatta inferenza di tipo: viene assegnata ad ogni variabile legata il set esatto di tutti i valori che questa può assumere.
+I tipi ricoprono un ruolo importante anche nella parte statica del linguaggio: la correttezza di ogni trasformazione definita in \cduce è garantita staticamente. Inoltre in \cduce il pattern matching viene effettuato attraverso un'esatta inferenza di tipo: viene assegnata a ogni variabile legata il set esatto di tutti i valori che questa può assumere.
 
-In questo modo è possibile costruire un sistema di tipi statico e molto preciso, che permette una migliore descrizione del comportamento dinamico del programma sviluppato
+In questo modo è possibile costruire un sistema di tipi statico e molto preciso, che permette una migliore descrizione del comportamento dinamico del programma sviluppato.
 \subsubsection{Pattern matching}
 \label{CDucePattern}
 È un'operazione fondamentale in \cduce ed ha la forma:
@@ -97,13 +97,13 @@ In cui la prima riga è l'interfaccia della funzione, il rimanente è detto corp
 	\item interfaccia: rappresenta il modo in cui la funzione si comporta: quando riceve un elemento di tipo \verb|ti|, la funzione restituirà un elemento di tipo \verb|si|; per ogni clausola \verb|ti -> si| il sistema verifica che la funzione trasformi correttamente gli elementi;
 	\item corpo della funzione: le funzioni operano per pattern matching degli argomenti: viene eseguita la prima trasformazione tale che l'argomento ricevuto come parametro faccia il match col pattern \verb|pi|. 
 \end{itemize}
-In \cduce è possibile definire anche applicazioni parziali(curried functions\footnote{https://en.wikipedia.org/wiki/Currying}) e funzioni di ordine superiore\footnote{https://en.wikipedia.org/wiki/Higher-order\_function}
+In \cduce è possibile definire anche applicazioni parziali(curried functions\footnote{\url{https://en.wikipedia.org/wiki/Currying}}) e funzioni di ordine superiore\footnote{\url{https://en.wikipedia.org/wiki/Higher-order\_function}}
 \section{Metalinguaggi}
-Un metalinguaggio è in generale un linguaggio, o sistema di segni, naturale o artificiale, adottato per la descrizione della struttura formale di dati linguaggi\footnote{https://www.treccani.it/vocabolario/metalinguaggio}. In questo elaborato parliamo di linguaggi su tre differenti livelli:
+Un metalinguaggio è in generale un linguaggio, o sistema di segni, naturale o artificiale, adottato per la descrizione della struttura formale di dati linguaggi\footnote{\url{https://www.treccani.it/vocabolario/metalinguaggio}}. In questo elaborato parliamo di linguaggi su tre differenti livelli:
 \begin{itemize}
 	\item linguaggi di programmazione: sono i linguaggi con i quali sviluppiamo strumenti più o meno automatici per la manipolazione di basi di conoscenza;
 	\item ontologie e tesauri: esprimono della conoscenza in modo formale, rispettano certe logiche per poter essere usate e restituiscono all'interrogatore una risposta che quest'ultimo sia in grado di comprendere
-	\item linguaggi per descrivere le basi di conoscenza: abbiamo bisogno di un linguaggio per descrivere la struttura di una KB, per definire quali relazioni possono esserci e in generale per parlare della KB stessa; chiameremo questi ultimi \say{metalinguaggi}\footnote{Questi linguaggi non ci permettono di descrivere il dominio di interesse di per sè ma descrivono come descrivere il dominio} per distinguerli dai linguaggi di programmazione e dalla conoscenza che stiamo rappresentando.
+	\item linguaggi per descrivere le basi di conoscenza: abbiamo bisogno di un linguaggio per descrivere la struttura di una KB, per definire quali relazioni possono esserci e in generale per parlare della KB stessa; chiameremo questi ultimi \say{metalinguaggi}\footnote{Questi linguaggi non ci permettono di descrivere il dominio di interesse di per sé ma descrivono come descrivere il dominio} per distinguerli dai linguaggi di programmazione e dalla conoscenza che stiamo rappresentando.
 \end{itemize}
 Presentiamo alcuni metalinguaggi importanti che useremo per descrivere ontologie e tesauri.
 \subsection{XML}
@@ -130,23 +130,23 @@ Questa entità descrive una donna di nome Clara, che ha un figlio maschio di nom
 Alla luce di questa descrizione si può provare a reinterpretare il listato \ref{lst:persone.rdf} che descrive la relazione di parentela tra Giulio Cesare e Bruto.
 \subsection{RDF/RDFS}
 \subsubsection{RDF}
-RDF (Resource Description Framework) è un framework per il processing di metadati\footnote{Esattamente come i metalinguaggi i metadati sono dati che descrivono altri dati}; un framework è un'architettura logica che supporta una prassi, una metodologia o un progetto\footnote{https://it.wikipedia.org/wiki/Framework}, in questo caso definisce le regole per la descrizione della conoscenza. RDF permette l'interoperabilità tra applicazioni che si scambiano informazioni comprensibili ad un automa.
+RDF (Resource Description Framework) è un framework per il processing di metadati\footnote{Esattamente come i metalinguaggi i metadati sono dati che descrivono altri dati}; un framework è un'architettura logica che supporta una prassi, una metodologia o un progetto\footnote{\url{https://it.wikipedia.org/wiki/Framework}}, in questo caso definisce le regole per la descrizione della conoscenza. RDF permette l'interoperabilità tra applicazioni che si scambiano informazioni comprensibili a un automa.
 
 Lo scopo di RDF è quello di automatizzare il processing di risorse Web; trova quindi applicazione in: ricerca di informazioni permettendo un motore di ricerca migliore, catalogazione della conoscenza, descrizione di una collezione di pagine che rappresentano un unico \say{documento} logico, ecc...\cite{brickley1998resource}
 
 RDF si basa sull'idea di rappresentare oggetti attraverso identificatori Web (URI\footnote{Uniform Resource Identifiers}) e di descrivere le risorse in termini di semplici proprietà e valori. I valori possono essere tipi semplici (numeri, caratteri, stringhe) oppure altre risorse identificate con URI.
 
-RDF permette quindi di esprimere semplici affermazioni riguardo risorse attraverso grafi i cui nodi rappresentano risorse e i cui archi rappresentano proprietà e valori. Per rappresentre qualsiasi informazione in un documenro RDF si usa la sintassi XML (tag e namespace)\cite{manola2004rdf}.
+RDF permette quindi di esprimere semplici affermazioni riguardo risorse attraverso grafi i cui nodi rappresentano risorse e i cui archi rappresentano proprietà e valori. Per rappresentare qualsiasi informazione in un documento RDF si usa la sintassi XML (tag e namespace)\cite{manola2004rdf}.
 \subsubsection{RDFS}
-Uno Schema RDF definisce quali siano le proprietà valide che si possono esprimere in una particoloare descrizione con RDF; permette inoltre di imporre caratteristiche o restrizioni alle proprietà e ai valori che queste possono assumere. Per identificare uno Schema RDF viene usato il meccanismo dei namespace XML\footnote{Una serie di nomi, identificati da un URI usati in un documento XML come tipi di un elemento e nomi di attributi\cite{bray1999namespaces}}.
+Uno Schema RDF definisce quali siano le proprietà valide che si possono esprimere in una particolare descrizione con RDF; permette inoltre di imporre caratteristiche o restrizioni alle proprietà e ai valori che queste possono assumere. Per identificare uno Schema RDF viene usato il meccanismo dei namespace XML\footnote{Una serie di nomi, identificati da un URI usati in un documento XML come tipi di un elemento e nomi di attributi\cite{bray1999namespaces}}.
 
-Interpretare uno Schema RDF significa attribuire un valore semantico ad ogni proprietà presente nella descrizione RDF, questo significa che, anche se un'applicazione non è in grado di capire lo schema, può comunque ricostruire il grafo di risorse descritto da RDF\cite{miller1998introduction}.
+Interpretare uno Schema RDF significa attribuire un valore semantico a ogni proprietà presente nella descrizione RDF, questo significa che, anche se un'applicazione non è in grado di capire lo schema, può comunque ricostruire il grafo di risorse descritto da RDF\cite{miller1998introduction}.
 \subsection{OWL}
 L'espressività di RDF e RDFS è limitata, potendo descrivere solo predicati binari, una struttura delle classi gerarchica e proprietà anch'esse gerarchiche con un dominio e un codominio.
 
-Sono state individuate dal gruppo di ricerca \say{Web Ontology Working Group} una serie di casi in cui le ontologie devono poter essere descritte con linguaggi più espressivi rispeto a RDF e RDFS\cite{antoniou2009web}.
+Sono state individuate dal gruppo di ricerca \say{Web Ontology Working Group} una serie di casi in cui le ontologie devono poter essere descritte con linguaggi più espressivi rispetto a RDF e RDFS\cite{antoniou2009web}.
 
-Presentiamo le funzionalità aggiunte da OWL Full: la versione più espressiva\footnote{E anche più pesante computazionalmente} del linguaggio OWL; per una descrizione più approfondita del linguaggio si rimanda al documento prodotto da W3C a riguardo\footnote{https://www.w3.org/TR/2004/REC-owl-features-20040210}.
+Presentiamo le funzionalità aggiunte da OWL Full: la versione più espressiva\footnote{E anche più pesante computazionalmente} del linguaggio OWL; per una descrizione più approfondita del linguaggio si rimanda al documento prodotto da W3C a riguardo\footnote{\url{https://www.w3.org/TR/2004/REC-owl-features-20040210}}.
 \subsubsection{OWL Full}
 Presenta la compatibilità massima coi documenti RDF/RDFS, ha la massima espressività, ma non è un sistema decidibile e completo. Descriviamo questo con il solo scopo di fornire l'elenco più completo possibile di funzionalità aggiunte per aumentare l'espressività di RDF/RDFS.
 
@@ -163,8 +163,8 @@ In OWL Full è, inoltre, possibile utilizzare ogni primitiva del linguaggio OWL 
 \subsection{SKOS}
 SKOS (Simple Knowledge Organization System) è un modello basato su RDF che permette di esprimere la struttura base e il contenuto di schemi concettuali come tesauri, tassonomie e altri tipi di vocabolari affini\cite{isaac2009skos}.
 
-In SKOS i concetti possono essere identificati con URI, etichettati con stringhe di caratteri in una o più lingue, descritti con delle annotazioni, associati ad altri concetti o organizzati in strutture gerarchiche informali\cite{miles2009skos}.
+In SKOS i concetti possono essere identificati con URI, etichettati con stringhe di caratteri in una o più lingue, descritti con delle annotazioni, associati ad altri concetti od organizzati in strutture gerarchiche informali\cite{miles2009skos}.
 
 Più avanti vedremo che questo linguaggio è stato usato per descrivere il tesauro \say{Eurpeana Fashion Thesaurus}, questo tesauro è facilmente reperibile online ed è ottimo per i nostri esperimenti di editing (ne parleremo in \ref{ch3}).
 \section{Conclusioni}
-Ora che abbiamo definito i concetti base che incontreremo nell'elaborato, possiamo passare alla parte più pratica in cui vedremo come manipolare i metalinguaggi attraverso programmi in \cduce (\ref{ch2}), come la trasformazione di tag ci permetta di passare da una rappresentazione della conoscenza all'altra (\ref{ch3}) e come possiamo fare inferenza e ricavare informazioni da una base di conoscenza direttamente attraverso \cduce senza ricorrere a reasoner esterni (\ref{ch4}).
+Ora che abbiamo definito i concetti base che incontreremo nell'elaborato, possiamo passare alla parte più pratica in cui vedremo come manipolare i metalinguaggi attraverso programmi in \cduce (capitolo \ref{ch2}), come la trasformazione di tag ci permetta di passare da una rappresentazione della conoscenza all'altra (capitolo \ref{ch3}) e come possiamo fare inferenza e ricavare informazioni da una base di conoscenza direttamente attraverso \cduce senza ricorrere a reasoner esterni (capitolo \ref{ch4}).
