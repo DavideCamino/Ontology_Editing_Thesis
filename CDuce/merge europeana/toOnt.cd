@@ -64,4 +64,4 @@ let fun thesaurusToOntology (Thesaurus -> Ontology)
 	
 	let ont : Ontology = thesaurusToOntology(thes);;
 	
-	dump_to_file_utf8 "europeana.rdf" (print_xml_utf8 ont);;
+	dump_to_file_utf8 "europeana2.rdf" (print_xml_utf8 ont);;

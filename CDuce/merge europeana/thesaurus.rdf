@@ -18027,7 +18027,6 @@
     <skos:inScheme rdf:resource="http://thesaurus.europeanafashion.eu/thesaurus/Techniques"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://thesaurus.europeanafashion.eu/thesaurus/11093">
-    <skos:broader rdf:resource="http://thesaurus.europeanafashion.eu/thesaurus/10068"/>
     <skos:broader rdf:resource="http://thesaurus.europeanafashion.eu/thesaurus/10249"/>
     <skos:exactMatch rdf:resource="http://vocab.getty.edu/aat/300403911"/>
     <skos:prefLabel xml:lang="en">footwear by function</skos:prefLabel>
