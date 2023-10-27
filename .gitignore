@@ -3,7 +3,7 @@ Thesis/*
 !Thesis/Chapter/
 !Thesis/Code/
 !Thesis/Picture/
-!Thesis/main.pdf
-!Thesis/main.tex
+!Thesis/Thesis.pdf
+!Thesis/Thesis.tex
 
 CDuce/**/*.properties
