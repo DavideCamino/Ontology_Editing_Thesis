@@ -98,6 +98,15 @@ Esistono numerose interfacce da cui trarre ispirazione\footnote{Se la creazione 
 	\item\label{ch5.4_func}funzioni di ordine superiore: laddove le funzioni generali non bastano, si potrebbero pensare funzioni di ordine superiore complesse a piacere che servano per manipolare in modo molto specifico le ontologie che si stanno trattando: queste funzioni vengono messe a disposizione dell'utente che deve solo integrare piccole e semplici funzioni che, prese come argomento dalla funzione di ordine superiore, la rendano specifica per la particolare ontologia d'interesse. Questo limita notevolmente la necessità di programmare dell'utente anche quando si voglia costruire degli strumenti molto specifici per la propria ontologia;
 	\item creazione guidata di Query: esistono già numerosi strumenti che permettono la creazione di Query, anche particolarmente complesse, in modo grafico e guidato; data la profonda somiglianza tra le Query espresse in linguaggio SQL e la sintassi in \cduce, sarebbe possibile riproporre uno strumento del genere per rendere le Query accessibili.	
 \end{itemize}
+\subsection{Confronto con esperti}
+Un passo importante prima di procedere nello sviluppo di nuovi strumenti e di un'interfaccia grafica, sarà proporre i risultati ottenuti a esperti del settore della rappresentazione della conoscenza.
+
+Da tale confronto potranno nascere interessanti considerazioni sull'uso di \cduce nella manipolazione delle KB, in particolare nel confronto bisognerà valutare:
+\begin{itemize}
+	\item se effettivamente i risultati raggiunti possono essere interessanti e utili dal punto di vista dello sviluppo e della manipolazione delle basi di conoscenza;
+	\item se le garanzie di correttezza offerte de \cduce sono effettivamente importanti nella realizzazione di KB consistenti e non contraddittorie e se questo vantaggio in termini di correttezza controllata staticamente è sufficiente a giustificare il fatto che gli utilizzatori possano dover implementare delle funzioni per sfruttare appieno le potenzialità di \cduce;
+	\item se, infine, i due punti precedenti mettono in luce che \cduce è un buono strumento per la manipolazione della conoscenza formale allora l'esperienza e la competenza di un esperto della rappresentazione della conoscenza sarebbero fondamentali per poter ideare e sviluppare un'interfaccia grafica che possa essere funzionale, comoda ed efficiente da utilizzare.
+\end{itemize}
 \section{Conclusioni}
 \cduce nonostante sia classificato come prototipo, è uno strumento completo ed espressivo per la manipolazione di documenti XML e in particolare di ontologie\footnote{Si fa riferimento alla versione del software 0.6.1-rc1}. Offre una documentazione online ben curata e accessibile a un utente con solide basi di programmazione funzionale; la documentazione è inoltre accompagnata da una serie di esempi che guidano, almeno fino a un certo punto, un utente più novizio a muovere i primi passi con lo strumento potendo già realizzare programmi utili.
 
