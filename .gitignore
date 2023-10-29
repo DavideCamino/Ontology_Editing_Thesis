@@ -5,5 +5,5 @@ Thesis/*
 !Thesis/Picture/
 !Thesis/Thesis.pdf
 !Thesis/Thesis.tex
-
+!Thesis/Thesis_annotated.pdf
 CDuce/**/*.properties
