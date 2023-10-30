@@ -17,12 +17,13 @@ Quando andremo a caricare il documento con il comando alla riga 26, \cduce caric
 Una volta definita la struttura del documento possiamo definire delle funzioni che mappano un elemento in un altro elemento. Gli strumenti fondamentali sono:
 \begin{itemize}
 	\item pattern matching: descritto nel paragrafo \ref{CDucePattern}
+	\phantomsection
 	\item \verb|map|\label{map}: permette di applicare una funzione a tutti gli elementi di una lista e restituisce una nuova lista di elementi trasformati della stessa lunghezza della lista iniziale;
 	\item \verb|transform|: permette di applicare una funzione a ogni elemento di una lista, restituendo per ogni elemento una lista di lunghezza arbitraria (anche nulla) e concatenando infine il risultato. Grazie alla funzione \verb|transform| si può ottenere una lista di lunghezza diversa rispetto alla lista di partenza.
 \end{itemize}
 
 \subsection{Esempio}
-Consideriamo nuovamente l'ontologia padri-figli con struttura definita in \ref{lst:persone.cd} e costruiamo due funzioni, la prima (chiamata \verb|name|) che permetta di estrarre da un individuo tutti i nomi, la seconda (chiamata \verb|names|) che usi la prima per costruire una lista con tutti i nomi contenuti nell'ontologia.
+Consideriamo nuovamente l'ontologia padri-figli con struttura definita nel listato \ref{lst:persone.cd} e costruiamo due funzioni, la prima (chiamata \verb|name|) che permetta di estrarre da un individuo tutti i nomi, la seconda (chiamata \verb|names|) che usi la prima per costruire una lista con tutti i nomi contenuti nell'ontologia.
 \addocaml{basic functions}{lst:basic_functions.cd}{Code/basic_func.cd}
 Nella prima funzione, usando il pattern matching, si lega la variabile \verb|n| alla sequenza di tutti gli elementi di tipo \verb|Name| associati a quell'individuo, poi si usa \verb|map| per estrarre da ogni elemento di questa lista solo la stringa col nome.
 
