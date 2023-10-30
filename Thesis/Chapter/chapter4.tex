@@ -4,15 +4,25 @@
 In questo capitolo vediamo come sia possibile usare \cduce per fare il merge di ontologie, cercando di mettere in risalto quelli che possono essere i vantaggi di usare un linguaggio funzionale rispetto a uno strumento grafico. Alla fine del capitolo paragoneremo l'approccio con \cduce a quello con Protégé. Per mettere in evidenza i vantaggi di \cduce presentiamo un esempio un po' più complesso di quelli visti in precedenza in modo da far risaltare le potenzialità di \cduce e contemporaneamente dare un'idea di funzioni più complesse.
 
 \section{Obiettivo del merge}\label{ch4.1}
-Adesso che abbiamo creato un'ontologia a partire dall'\say{European Fashion Thesaurus} e abbiamo descritto una semplice ontologia per descrivere persone, vorremmo fonderle in una nuova ontologia che possa parlare degli usi e costumi della società, magari riferita a un ben preciso periodo storico. Vogliamo creare un'ontologia in cui sia possibile rappresentare delle persone, coi rispettivi legami di parentela e nella quale sia possibile associare alle persone uno status sociale, un lavoro e uno specifico abbigliamento.
+Fare il merge tra ontologie significa unire in modo consistente le informazioni contenute nelle varie ontologie di partenza, per ottenere un'ontologia finale in qualche modo più ricca e completa dei quelle di partenza. A seconda delle ontologie di partenza il merge può avere diversi scopi:
+\begin{itemize}
+	\item ontologie che descrivono gli stessi concetti: lo scopo è unire ontologie che trattano dello stesso dominio, a cui potrebbero aver lavorato diversi gruppi di ricerca. Il merge deve mettere in evidenza i concetti comuni, i sinonimi e presentare tutte le informazioni raccolte dai diversi gruppi in modo consistente;
+	\item traduzione di ontologie: avendo due o più ontologie in lingue diverse che trattano dello stesso dominio si vuole unire le ontologie in modo da creare corrispondenza tra concetti in lingue diverse, evidenziare le differenze espressive delle lingue e creare una base comune e condivisa del linguaggio;
+	\item ontologie che trattano concetti diversi: si parte da ontologie che descrivono domini molto circostanziati per poi unirle in modo da rappresentare un modello più complesso e ricco di informazioni. Questo approccio permette di realizzare ontologie semplici limitando al massimo gli errori per poi unirle in modo da rappresentare un dominio costituito da molti concetti eterogenei. Ci troviamo in questo caso anche quando vorremmo poter usare ontologie già sviluppate come base di partenza per svilupparne di nuove.
+\end{itemize}
+
+In questo elaborato ci concentriamo sull'ultimo caso, illustrando come si possano unire 2 ontologie semplici e molto diverse fra loro per poter creare un modello di rappresentazione più ricco.
+
+Le ontologie di cui faremo il merge in questo capitolo sono quelle che abbiamo già incontrato: partiamo dall'\say{European Fashion Thesaurus} e dall'ontologia per descrivere persone, per fonderle in una nuova ontologia che possa parlare degli usi e costumi della società, magari riferita a un ben preciso periodo storico. Vogliamo creare un'ontologia in cui sia possibile rappresentare delle persone, coi rispettivi legami di parentela e nella quale sia possibile associare alle persone uno status sociale, un lavoro e uno specifico abbigliamento.
+
 \subsection{Ontologie di partenza}
-Per creare questa ontologia consideriamo 3 ontologie di partenza:
+Per creare la nuova ontologia consideriamo 3 ontologie di partenza:
 \begin{itemize}
 	\item \verb|society|: è lo scheletro dell'ontologia che vogliamo ottenere: è comodo crearla a priori in modo da non dover creare ex novo tutta la struttura in \cduce, inizialmente rappresenta delle persone sulle quali definiamo le relazioni \verb|born_in|, \verb|is| e \verb|work_as| che associano una persona con la città di nascita, con il suo status sociale e con il proprio lavoro;
 \end{itemize}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\textwidth]{Picture/society.rdf.pdf}
+	\includegraphics[width=.9\textwidth]{Picture/society.rdf.pdf}
 	\caption{grafo ontologia \texttt{society}}
 \end{figure}
 \begin{itemize}
@@ -20,7 +30,7 @@ Per creare questa ontologia consideriamo 3 ontologie di partenza:
 \end{itemize}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.75\textwidth]{Picture/people.2.pdf}
+	\includegraphics[width=.9\textwidth]{Picture/people.2.pdf}
 	\caption{grafo ontologia \texttt{people}}
 \end{figure}
 \phantomsection\label{ont_fashion}
@@ -29,7 +39,7 @@ Per creare questa ontologia consideriamo 3 ontologie di partenza:
 \end{itemize}
 \begin{figure}[H]
 	\centering	
-	\includegraphics[width=0.65\textwidth]{Picture/europeana_relation.pdf}
+	\includegraphics[width=.9\textwidth]{Picture/europeana_relation.pdf}
 	\caption{\label{fig:ontEur}grafo ontologia \texttt{europeana}}
 \end{figure}
 \subsection{Ontologia di arrivo}
@@ -95,7 +105,7 @@ L'ontologia che abbiamo costruito permette di descrivere la società nelle modal
 Del risultato finale riportiamo solo la parte di grafo che descrive le persone, la parte che descrive il vestiario è esattamente uguale a quella riportata nell'immagine \ref{fig:ontEur} alla quale togliamo le fibre artificiali. Il grafo che descrive le persone ci fa apprezzare come effettivamente le due classi estratte, una dall'ontologia \verb|society| e l'altra dall'ontologia \verb|people|, siano effettivamente state accorpate\footnote{In realtà rimangono due classi ma sono dichiarate equivalenti} in un'unica classe che possiede tutti gli attributi e le relazioni delle due classi di partenza.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{Picture/society_merged.rdf.pdf}
+	\includegraphics[width=\textwidth]{Picture/society_merged.rdf.pdf}
 	\caption{grafo ontologia \texttt{society merged}}
 \end{figure}
 
