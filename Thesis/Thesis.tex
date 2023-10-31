@@ -21,8 +21,7 @@
 \usepackage{xstring}
 \usepackage{hyperref}
 \usepackage{xspace} 
-\usepackage[backend=bibtex, maxbibnames=10, minalphanames=3]{biblatex}
-
+\usepackage[backend=bibtex, maxbibnames=10, minalphanames=3, sorting=none, style=nature]{biblatex}
 
 \bibliography{Biblio/biblio} 
 \sloppy
@@ -75,7 +74,12 @@
 	\input{Chapter/chapter3}
 	\input{Chapter/chapter4}
 	\input{Chapter/chapter5}
-	\newpage
+	\cleardoublepage
+	\phantomsection
 	\input{Chapter/listing}
+	\phantomsection
+	\cleardoublepage
+	\phantomsection
+	\addcontentsline{toc}{chapter}{Bibliografia}
 	\printbibliography	
 \end{document}
