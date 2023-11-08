@@ -1,0 +1,85 @@
+\documentclass{report}
+
+\usepackage[italian]{babel}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage{svg}
+\usepackage{subcaption}
+\usepackage{wallpaper}
+\usepackage{emptypage}
+\usepackage[none]{hyphenat}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[chapter]{minted}
+\usepackage{verbments}
+\usepackage{dirtytalk}
+\usepackage{xstring}
+\usepackage{hyperref}
+\usepackage{xspace} 
+\usepackage[backend=bibtex, maxbibnames=10, minalphanames=3, sorting=none, style=nature]{biblatex}
+
+\bibliography{Biblio/biblio} 
+\sloppy
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=black,
+}
+
+
+\title{Editing di ontologie tramite il linguaggio di programmazione funzionale \cduce}
+\author{Davide Camino}
+\newcommand{\supervisor}{Professoressa Viviana Bono}
+\newcommand{\addocaml}[3] {
+	\begin{listing}[H]
+		\caption{#1}
+		\label{#2}
+	\end{listing}
+	\vspace{-.5cm}
+	\inputminted[tabsize=2, linenos, breaklines, bgcolor=bg, escapeinside=~~]{OCaml}{"#3"}}
+\newcommand{\addxml}[3] {
+	\begin{listing}[H]
+		\caption{#1}
+		\label{#2}
+	\end{listing}
+	\vspace{-.5cm}
+	\inputminted[tabsize=2, linenos, breaklines, bgcolor=bg]{XML}{"#3"}}
+\newcommand{\cduce}{$\mathbb{C}$Duce\xspace}
+\renewcommand{\listoflistingscaption}{Elenco listati}
+\renewcommand{\listingscaption}{Listato}
+
+\definecolor{bg}{rgb}{0.95,0.95,0.95}
+
+
+\begin{document}
+	\input{Chapter/frontespizio}
+	\input{Chapter/blankpage}
+	\pagenumbering{roman}
+	\input{Chapter/dedica}
+	\cleardoublepage
+	\input{Chapter/blanknum}
+	\input{Chapter/abstract}
+	\cleardoublepage
+	\input{Chapter/blanknum}
+	\input{Chapter/index_print}
+	\cleardoublepage
+	\pagenumbering{arabic}
+	\input{Chapter/chapter1}	
+	\input{Chapter/chapter2}
+	\input{Chapter/chapter3}
+	\input{Chapter/chapter4}
+	\input{Chapter/chapter5}
+	\cleardoublepage
+	\phantomsection
+	\input{Chapter/listing_print}
+	\phantomsection
+	\cleardoublepage
+	\phantomsection
+	\addcontentsline{toc}{chapter}{Bibliografia}
+	\printbibliography	
+\end{document}

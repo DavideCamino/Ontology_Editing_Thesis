@@ -1,0 +1,43 @@
+\begin{titlepage}
+	
+	% solo il frontespizio deve essere simmetrico rispetto ai margini interno ed esterno
+	\newgeometry{hmargin=2.5cm,vmargin=2.5cm}
+	%\ThisLLCornerWallPaper{1}{Picture/logoOld3.pdf}
+	\begin{figure}
+		\centering
+			\includegraphics[width=.35\textwidth]{Picture/loghi2.pdf}
+	\end{figure}
+	
+	\vspace*{\stretch{0.5}}
+	
+	\begin{center}
+		\makeatletter % serve per poter usare \@...
+		
+		% NOTA: il Times New Roman non supporta il maiuscoletto.
+		\textsc{UNIVERSITÀ DI TORINO}\\
+		\textsc{DIPARTIMENTO DI INFORMATICA}\\
+		\vspace*{\stretch{0.1}}
+		\textsc{CORSO DI LAUREA TRIENNALE IN INFORMATICA}
+		
+		\vspace*{\stretch{0.5}}
+		\LARGE
+		\textbf{\@title}
+		
+		\vspace*{\stretch{1}}
+		\normalsize
+		\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r}
+			\textbf{Relatore} & \textbf{Laureando} \\
+			\supervisor       & \@author           \\
+			                  & Matricola: 897753
+			\\
+		\end{tabular*}
+		
+		\vspace*{\stretch{2}}
+		\textsc{ANNO ACCADEMICO 2022-2023} \\
+		\vspace*{\stretch{0.1}}
+		Data di laurea 14 Novembre 2023
+		
+		\makeatother % serve dopo \makeatletter
+	\end{center}
+	\restoregeometry
+\end{titlepage}
